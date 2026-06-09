@@ -81,7 +81,7 @@ export default function VoiceIQPortal() {
     if (selectedCalibId === null) return
     async function fetchCalibDetail() {
       try {
-        const res = await fetch(`http://localhost:8000/api/runs/${selectedCalibId}`)
+        const res = await fetch(`/api/runs/${selectedCalibId}`)
         const data = await res.json()
         setSelectedCalibDetail(data)
       } catch (err) {
@@ -96,21 +96,34 @@ export default function VoiceIQPortal() {
     async function initFetch() {
       try {
         const [runsRes, scenariosRes, calibRes] = await Promise.all([
-          fetch("http://localhost:8000/api/runs"),
-          fetch("http://localhost:8000/api/scenarios"),
-          fetch("http://localhost:8000/api/calibration")
+          fetch("/api/runs"),
+          fetch("/api/scenarios"),
+          fetch("/api/calibration")
         ])
         
         const runsData = await runsRes.json()
         const scenariosData = await scenariosRes.json()
         const calibData = await calibRes.json()
 
-        setRuns(runsData)
+        // Load custom runs from localStorage
+        let localRuns: TestRun[] = []
+        try {
+          const stored = localStorage.getItem("voiceiq_custom_runs")
+          if (stored) {
+            localRuns = JSON.parse(stored)
+          }
+        } catch (e) {
+          console.error("Failed to read custom runs", e)
+        }
+
+        const combinedRuns = [...localRuns, ...runsData]
+
+        setRuns(combinedRuns)
         setScenarios(scenariosData)
         setCalibrationData(calibData)
         
-        if (runsData.length > 0) {
-          setSelectedRunId(runsData[0].id)
+        if (combinedRuns.length > 0) {
+          setSelectedRunId(combinedRuns[0].id)
         }
         if (calibData.length > 0) {
           setSelectedCalibId(calibData[0].test_run_id)
@@ -119,7 +132,7 @@ export default function VoiceIQPortal() {
           setSelectedScenarioId(scenariosData[0].id)
         }
       } catch (err) {
-        console.error("Failed to connect to backend api. Ensure uvicorn is running on port 8000", err)
+        console.error("Failed to fetch API data", err)
       } finally {
         setLoading(false)
       }
@@ -130,9 +143,27 @@ export default function VoiceIQPortal() {
   // Fetch Detailed Run Transcript
   useEffect(() => {
     if (selectedRunId === null) return
+
+    // Check if it is a local storage run first
+    let localDetails: RunDetail[] = []
+    try {
+      const stored = localStorage.getItem("voiceiq_custom_run_details")
+      if (stored) {
+        localDetails = JSON.parse(stored)
+      }
+    } catch (e) {
+      console.error(e)
+    }
+
+    const found = localDetails.find(r => r.id === selectedRunId)
+    if (found) {
+      setRunDetail(found)
+      return
+    }
+
     async function fetchDetail() {
       try {
-        const res = await fetch(`http://localhost:8000/api/runs/${selectedRunId}`)
+        const res = await fetch(`/api/runs/${selectedRunId}`)
         const data = await res.json()
         setRunDetail(data)
       } catch (err) {
@@ -160,7 +191,7 @@ export default function VoiceIQPortal() {
     setSimResult(null)
     setSimError(null)
     try {
-      const response = await fetch("http://localhost:8000/api/simulate", {
+      const response = await fetch("/api/simulate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -173,14 +204,54 @@ export default function VoiceIQPortal() {
         throw new Error(errData.detail || "Simulation run failed")
       }
       const data = await response.json()
-      setSimResult(data)
       
-      // Refresh run logs history
-      const runsRes = await fetch("http://localhost:8000/api/runs")
-      const runsData = await runsRes.json()
-      setRuns(runsData)
+      const newRunDetail: RunDetail = {
+        id: data.run_id,
+        scenario_id: selectedScenarioId,
+        scenario_name: scenarios.find(s => s.id === selectedScenarioId)?.scenario_name || "Unknown Scenario",
+        difficulty_level: scenarios.find(s => s.id === selectedScenarioId)?.difficulty_level || "medium",
+        overall_score: data.overall_score,
+        total_turns: data.total_turns,
+        goal_completed: data.goal_completed ? 1 : 0,
+        created_at: new Date().toISOString(),
+        agent_system_prompt: agentPrompt,
+        conversation_transcript: data.transcript,
+        scores_breakdown: data.scores_breakdown,
+        failure_points: data.failure_points,
+        recommendations: data.recommendations.join("\n")
+      }
+      
+      setSimResult(data)
+
+      const newRunItem: TestRun = {
+        id: newRunDetail.id,
+        scenario_id: newRunDetail.scenario_id,
+        scenario_name: newRunDetail.scenario_name,
+        difficulty_level: newRunDetail.difficulty_level,
+        overall_score: newRunDetail.overall_score,
+        total_turns: newRunDetail.total_turns,
+        goal_completed: newRunDetail.goal_completed,
+        created_at: newRunDetail.created_at
+      }
+
+      try {
+        const storedRuns = localStorage.getItem("voiceiq_custom_runs")
+        const currentRuns: TestRun[] = storedRuns ? JSON.parse(storedRuns) : []
+        const updatedRuns = [newRunItem, ...currentRuns]
+        localStorage.setItem("voiceiq_custom_runs", JSON.stringify(updatedRuns))
+
+        const storedDetails = localStorage.getItem("voiceiq_custom_run_details")
+        const currentDetails: RunDetail[] = storedDetails ? JSON.parse(storedDetails) : []
+        const updatedDetails = [newRunDetail, ...currentDetails]
+        localStorage.setItem("voiceiq_custom_run_details", JSON.stringify(updatedDetails))
+
+        setRuns([...updatedRuns, ...runs.filter(r => !updatedRuns.some(ur => ur.id === r.id))])
+        setSelectedRunId(newRunItem.id)
+      } catch (e) {
+        console.error("Failed to save run to localStorage", e)
+      }
     } catch (err: any) {
-      setSimError(err.message || "Failed to trigger Ollama simulation loop.")
+      setSimError(err.message || "Failed to trigger OpenAI simulation loop.")
     } finally {
       setSimulating(false)
     }
@@ -574,10 +645,10 @@ export default function VoiceIQPortal() {
                         />
                       </div>
                       <div>
-                        <h4 className="font-bold text-sm">Ollama Simulation Loop Active</h4>
+                        <h4 className="font-bold text-sm">Simulation Loop Active</h4>
                         <p className="text-xs text-white/50 mt-1 max-w-sm">
-                          Agent and customer simulator are exchanging messages in a turn-based loop.
-                          The LLM Judge will then run a 3x self-consistency quality evaluation.
+                          Agent and customer simulator are exchanging messages in a turn-based loop using OpenAI gpt-4o-mini.
+                          The LLM Judge will then run a consistency quality evaluation.
                         </p>
                       </div>
                     </div>

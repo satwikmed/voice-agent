@@ -1,0 +1,502 @@
+[
+  {
+    "id": 1,
+    "test_run_id": 1,
+    "human_score": 90.0,
+    "human_failure_points": "[]",
+    "judge_score": 91.4,
+    "score_delta": 1.4000000000000057,
+    "notes": "TODO: Replace with your own hand-score. Agent handled this well, strong performance.",
+    "created_at": "2026-06-09 00:16:26",
+    "judge_score_computed": 91.4,
+    "scores_breakdown": {
+      "response_relevance": 92,
+      "objection_handling": 85,
+      "conversation_flow": 95,
+      "empathy": 88,
+      "goal_completion": 95
+    },
+    "run_failure_points": [],
+    "scenario_name": "Interested Buyer"
+  },
+  {
+    "id": 2,
+    "test_run_id": 2,
+    "human_score": 68.0,
+    "human_failure_points": "[1, 3, 5]",
+    "judge_score": 78.2,
+    "score_delta": 10.200000000000003,
+    "notes": "TODO: Replace with your own hand-score. Generic greeting and flat responses noticeable.",
+    "created_at": "2026-06-09 00:16:26",
+    "judge_score_computed": 78.2,
+    "scores_breakdown": {
+      "response_relevance": 80,
+      "objection_handling": 72,
+      "conversation_flow": 78,
+      "empathy": 65,
+      "goal_completion": 90
+    },
+    "run_failure_points": [
+      {
+        "turn": 1,
+        "reason": "Generic greeting \u2014 missed opportunity to create rapport. 'TechFlow support' sounds like a support line, not a sales conversation."
+      },
+      {
+        "turn": 3,
+        "reason": "Response was factual but flat. Didn't acknowledge the caller's pain point about speed or show enthusiasm."
+      },
+      {
+        "turn": 5,
+        "reason": "Jumped straight to pricing without asking qualifying questions or building value around the HubSpot integration."
+      }
+    ],
+    "scenario_name": "Interested Buyer"
+  },
+  {
+    "id": 3,
+    "test_run_id": 3,
+    "human_score": 55.0,
+    "human_failure_points": "[3, 5]",
+    "judge_score": 63.1,
+    "score_delta": 8.100000000000001,
+    "notes": "TODO: Replace with your own hand-score. Vague answers were frustrating.",
+    "created_at": "2026-06-09 00:16:26",
+    "judge_score_computed": 63.1,
+    "scores_breakdown": {
+      "response_relevance": 62,
+      "objection_handling": 55,
+      "conversation_flow": 65,
+      "empathy": 45,
+      "goal_completion": 80
+    },
+    "run_failure_points": [
+      {
+        "turn": 3,
+        "reason": "Entirely generic product description. Didn't address the caller's specific pain point about slow dashboards."
+      },
+      {
+        "turn": 5,
+        "reason": "Vague response to a direct question about dashboard speed. 'Modern technology' is meaningless \u2014 should cite specific metrics like load times."
+      },
+      {
+        "turn": 7,
+        "reason": "Answered the HubSpot question but buried it. Jumped to pricing without building value around the integration."
+      }
+    ],
+    "scenario_name": "Interested Buyer"
+  },
+  {
+    "id": 4,
+    "test_run_id": 4,
+    "human_score": 86.0,
+    "human_failure_points": "[]",
+    "judge_score": 89.0,
+    "score_delta": 3.0,
+    "notes": "TODO: Replace with your own hand-score. Solid price negotiation.",
+    "created_at": "2026-06-09 00:16:26",
+    "judge_score_computed": 89.0,
+    "scores_breakdown": {
+      "response_relevance": 90,
+      "objection_handling": 92,
+      "conversation_flow": 88,
+      "empathy": 75,
+      "goal_completion": 95
+    },
+    "run_failure_points": [],
+    "scenario_name": "Price Shopper"
+  },
+  {
+    "id": 5,
+    "test_run_id": 5,
+    "human_score": 65.0,
+    "human_failure_points": "[3, 7, 9]",
+    "judge_score": 64.0,
+    "score_delta": -1.0,
+    "notes": "TODO: Replace with your own hand-score. Hesitant language hurt credibility.",
+    "created_at": "2026-06-09 00:16:26",
+    "judge_score_computed": 64.0,
+    "scores_breakdown": {
+      "response_relevance": 68,
+      "objection_handling": 55,
+      "conversation_flow": 62,
+      "empathy": 50,
+      "goal_completion": 78
+    },
+    "run_failure_points": [
+      {
+        "turn": 3,
+        "reason": "Tried discovery before providing the requested pricing \u2014 a mismatch with this caller's direct communication style."
+      },
+      {
+        "turn": 7,
+        "reason": "Used marketing-speak ('we believe the value justifies the investment') instead of concrete differentiators. This is exactly what the caller was pushing back on."
+      },
+      {
+        "turn": 9,
+        "reason": "Uncertain language ('I think', 'roughly') undermines credibility when negotiating price. Should present discounts with confidence."
+      }
+    ],
+    "scenario_name": "Price Shopper"
+  },
+  {
+    "id": 6,
+    "test_run_id": 6,
+    "human_score": 28.0,
+    "human_failure_points": "[3, 5, 7]",
+    "judge_score": 28.2,
+    "score_delta": 0.1999999999999993,
+    "notes": "TODO: Replace with your own hand-score. Complete failure to provide pricing.",
+    "created_at": "2026-06-09 00:16:26",
+    "judge_score_computed": 28.2,
+    "scores_breakdown": {
+      "response_relevance": 35,
+      "objection_handling": 25,
+      "conversation_flow": 40,
+      "empathy": 30,
+      "goal_completion": 15
+    },
+    "run_failure_points": [
+      {
+        "turn": 3,
+        "reason": "Ignored explicit request for no pitch and tried to qualify instead."
+      },
+      {
+        "turn": 5,
+        "reason": "Gave a price range instead of a specific quote for the requested 50 seats."
+      },
+      {
+        "turn": 7,
+        "reason": "Third consecutive non-answer to a direct pricing question. Used 'premium quality' and 'high satisfaction' \u2014 empty phrases when the caller wants a number."
+      }
+    ],
+    "scenario_name": "Price Shopper"
+  },
+  {
+    "id": 7,
+    "test_run_id": 7,
+    "human_score": 92.0,
+    "human_failure_points": "[]",
+    "judge_score": 88.9,
+    "score_delta": -3.0999999999999943,
+    "notes": "TODO: Replace with your own hand-score. Excellent de-escalation.",
+    "created_at": "2026-06-09 00:16:26",
+    "judge_score_computed": 88.9,
+    "scores_breakdown": {
+      "response_relevance": 88,
+      "objection_handling": 90,
+      "conversation_flow": 85,
+      "empathy": 92,
+      "goal_completion": 90
+    },
+    "run_failure_points": [],
+    "scenario_name": "Angry Refund Demander"
+  },
+  {
+    "id": 8,
+    "test_run_id": 8,
+    "human_score": 48.0,
+    "human_failure_points": "[3, 5, 9, 11]",
+    "judge_score": 56.8,
+    "score_delta": 8.799999999999997,
+    "notes": "TODO: Replace with your own hand-score. Too many missed opportunities.",
+    "created_at": "2026-06-09 00:16:26",
+    "judge_score_computed": 56.8,
+    "scores_breakdown": {
+      "response_relevance": 62,
+      "objection_handling": 50,
+      "conversation_flow": 55,
+      "empathy": 48,
+      "goal_completion": 65
+    },
+    "run_failure_points": [
+      {
+        "turn": 3,
+        "reason": "Asked the caller to repeat what happened when they'd already explained. Shows they weren't listening."
+      },
+      {
+        "turn": 5,
+        "reason": "Pushed troubleshooting when the caller explicitly said they don't want it. This escalates frustration instead of de-escalating."
+      },
+      {
+        "turn": 9,
+        "reason": "'24-48 hours' is far too long for an angry customer who wants immediate resolution. Should have offered a tighter timeline."
+      },
+      {
+        "turn": 11,
+        "reason": "'My manager isn't available' without an alternative (callback time, direct transfer to billing) feels like a brush-off."
+      }
+    ],
+    "scenario_name": "Angry Refund Demander"
+  },
+  {
+    "id": 9,
+    "test_run_id": 9,
+    "human_score": 22.0,
+    "human_failure_points": "[3, 5, 7]",
+    "judge_score": 21.5,
+    "score_delta": -0.5,
+    "notes": "TODO: Replace with your own hand-score. Terrible handling.",
+    "created_at": "2026-06-09 00:16:26",
+    "judge_score_computed": 21.5,
+    "scores_breakdown": {
+      "response_relevance": 30,
+      "objection_handling": 15,
+      "conversation_flow": 35,
+      "empathy": 20,
+      "goal_completion": 10
+    },
+    "run_failure_points": [
+      {
+        "turn": 3,
+        "reason": "Suggested 'restarting the application' to a customer reporting data corruption. This is tone-deaf and dismissive."
+      },
+      {
+        "turn": 5,
+        "reason": "Continued pushing troubleshooting after being explicitly told no. Twice."
+      },
+      {
+        "turn": 7,
+        "reason": "Cited policy as a barrier instead of finding a path forward. Made the customer feel trapped."
+      }
+    ],
+    "scenario_name": "Angry Refund Demander"
+  },
+  {
+    "id": 10,
+    "test_run_id": 10,
+    "human_score": 93.0,
+    "human_failure_points": "[]",
+    "judge_score": 91.1,
+    "score_delta": -1.9000000000000057,
+    "notes": "TODO: Replace with your own hand-score. Perfectly matched the exec's style.",
+    "created_at": "2026-06-09 00:16:26",
+    "judge_score_computed": 91.1,
+    "scores_breakdown": {
+      "response_relevance": 95,
+      "objection_handling": 88,
+      "conversation_flow": 96,
+      "empathy": 72,
+      "goal_completion": 98
+    },
+    "run_failure_points": [],
+    "scenario_name": "Impatient Executive"
+  },
+  {
+    "id": 11,
+    "test_run_id": 11,
+    "human_score": 18.0,
+    "human_failure_points": "[1, 3, 5]",
+    "judge_score": 19.8,
+    "score_delta": 1.8000000000000007,
+    "notes": "TODO: Replace with your own hand-score. Total mismatch with caller expectations.",
+    "created_at": "2026-06-09 00:16:26",
+    "judge_score_computed": 19.8,
+    "scores_breakdown": {
+      "response_relevance": 25,
+      "objection_handling": 20,
+      "conversation_flow": 30,
+      "empathy": 15,
+      "goal_completion": 10
+    },
+    "run_failure_points": [
+      {
+        "turn": 1,
+        "reason": "'Excited to chat' is filler that wastes time with an executive who stated a 2-minute window."
+      },
+      {
+        "turn": 3,
+        "reason": "Started a product pitch instead of answering the pricing question. Direct violation of what was requested."
+      },
+      {
+        "turn": 5,
+        "reason": "Used 'Absolutely!' filler and continued listing features instead of giving the price. Two turns wasted."
+      }
+    ],
+    "scenario_name": "Impatient Executive"
+  },
+  {
+    "id": 12,
+    "test_run_id": 12,
+    "human_score": 70.0,
+    "human_failure_points": "[3]",
+    "judge_score": 75.2,
+    "score_delta": 5.200000000000003,
+    "notes": "TODO: Replace with your own hand-score. Recovered but slow start.",
+    "created_at": "2026-06-09 00:16:26",
+    "judge_score_computed": 75.2,
+    "scores_breakdown": {
+      "response_relevance": 78,
+      "objection_handling": 72,
+      "conversation_flow": 75,
+      "empathy": 55,
+      "goal_completion": 88
+    },
+    "run_failure_points": [
+      {
+        "turn": 3,
+        "reason": "Asked a qualifying question before fully answering the pricing question. With this caller type, answer first, ask second."
+      }
+    ],
+    "scenario_name": "Impatient Executive"
+  },
+  {
+    "id": 13,
+    "test_run_id": 13,
+    "human_score": 88.0,
+    "human_failure_points": "[]",
+    "judge_score": 88.4,
+    "score_delta": 0.4000000000000057,
+    "notes": "TODO: Replace with your own hand-score. Charming redirection.",
+    "created_at": "2026-06-09 00:16:26",
+    "judge_score_computed": 88.4,
+    "scores_breakdown": {
+      "response_relevance": 88,
+      "objection_handling": 82,
+      "conversation_flow": 92,
+      "empathy": 90,
+      "goal_completion": 90
+    },
+    "run_failure_points": [],
+    "scenario_name": "Off-Topic Wanderer"
+  },
+  {
+    "id": 14,
+    "test_run_id": 14,
+    "human_score": 75.0,
+    "human_failure_points": "[3]",
+    "judge_score": 74.2,
+    "score_delta": -0.7999999999999972,
+    "notes": "TODO: Replace with your own hand-score. Redirects worked eventually.",
+    "created_at": "2026-06-09 00:16:26",
+    "judge_score_computed": 74.2,
+    "scores_breakdown": {
+      "response_relevance": 72,
+      "objection_handling": 68,
+      "conversation_flow": 70,
+      "empathy": 78,
+      "goal_completion": 82
+    },
+    "run_failure_points": [
+      {
+        "turn": 3,
+        "reason": "Redirect was too abrupt \u2014 'How can I help you with POS software?' without warmth felt like dismissing the Italy story."
+      },
+      {
+        "turn": 5,
+        "reason": "Missed opportunity to tie the redirect to the caller's joke about the Colosseum lasting longer than the POS."
+      }
+    ],
+    "scenario_name": "Off-Topic Wanderer"
+  },
+  {
+    "id": 15,
+    "test_run_id": 15,
+    "human_score": 30.0,
+    "human_failure_points": "[3, 5, 7]",
+    "judge_score": 39.2,
+    "score_delta": 9.200000000000003,
+    "notes": "TODO: Replace with your own hand-score. Robotic and alienating.",
+    "created_at": "2026-06-09 00:16:26",
+    "judge_score_computed": 39.2,
+    "scores_breakdown": {
+      "response_relevance": 70,
+      "objection_handling": 40,
+      "conversation_flow": 35,
+      "empathy": 18,
+      "goal_completion": 30
+    },
+    "run_failure_points": [
+      {
+        "turn": 3,
+        "reason": "Completely ignored the dog story with zero acknowledgment. Felt robotic and dismissive."
+      },
+      {
+        "turn": 5,
+        "reason": "Again ignored the Italy tangent entirely. Pattern of dismissiveness established."
+      },
+      {
+        "turn": 7,
+        "reason": "Gave a technically correct answer but the caller already felt the agent wasn't listening. The damage was done."
+      }
+    ],
+    "scenario_name": "Off-Topic Wanderer"
+  },
+  {
+    "id": 16,
+    "test_run_id": 16,
+    "human_score": 93.0,
+    "human_failure_points": "[]",
+    "judge_score": 91.7,
+    "score_delta": -1.2999999999999972,
+    "notes": "TODO: Replace with your own hand-score. Textbook competitive positioning.",
+    "created_at": "2026-06-09 00:16:26",
+    "judge_score_computed": 91.7,
+    "scores_breakdown": {
+      "response_relevance": 94,
+      "objection_handling": 92,
+      "conversation_flow": 90,
+      "empathy": 85,
+      "goal_completion": 95
+    },
+    "run_failure_points": [],
+    "scenario_name": "Competitor Mention"
+  },
+  {
+    "id": 17,
+    "test_run_id": 17,
+    "human_score": 55.0,
+    "human_failure_points": "[3, 5]",
+    "judge_score": 64.0,
+    "score_delta": 9.0,
+    "notes": "TODO: Replace with your own hand-score. Vague until pushed.",
+    "created_at": "2026-06-09 00:16:26",
+    "judge_score_computed": 64.0,
+    "scores_breakdown": {
+      "response_relevance": 62,
+      "objection_handling": 58,
+      "conversation_flow": 65,
+      "empathy": 55,
+      "goal_completion": 75
+    },
+    "run_failure_points": [
+      {
+        "turn": 3,
+        "reason": "'Superior product with better features' is the definition of a generic non-answer. Provides zero actionable information."
+      },
+      {
+        "turn": 5,
+        "reason": "Still using adjectives ('faster', 'more', 'better') instead of numbers. The caller had to push back twice before getting specifics."
+      }
+    ],
+    "scenario_name": "Competitor Mention"
+  },
+  {
+    "id": 18,
+    "test_run_id": 18,
+    "human_score": 20.0,
+    "human_failure_points": "[3, 5]",
+    "judge_score": 21.5,
+    "score_delta": 1.5,
+    "notes": "TODO: Replace with your own hand-score. Unprofessional competitor bashing.",
+    "created_at": "2026-06-09 00:16:26",
+    "judge_score_computed": 21.5,
+    "scores_breakdown": {
+      "response_relevance": 30,
+      "objection_handling": 15,
+      "conversation_flow": 35,
+      "empathy": 20,
+      "goal_completion": 10
+    },
+    "run_failure_points": [
+      {
+        "turn": 3,
+        "reason": "Trash-talked VoiceFlow directly \u2014 calling them 'outdated' and 'losing market share.' Unprofessional and triggers caller's defensive reaction."
+      },
+      {
+        "turn": 5,
+        "reason": "After being told to stop, continued framing everything as a comparison using negative language about the competitor ('buggy connectors', 'outages they've had')."
+      }
+    ],
+    "scenario_name": "Competitor Mention"
+  }
+]

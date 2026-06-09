@@ -1,0 +1,212 @@
+[
+  {
+    "id": 21,
+    "scenario_id": 4,
+    "scenario_name": "Impatient Executive",
+    "difficulty_level": "hard",
+    "overall_score": 76.17,
+    "total_turns": 4,
+    "goal_completed": 1,
+    "created_at": "2026-06-09 03:47:05"
+  },
+  {
+    "id": 20,
+    "scenario_id": 1,
+    "scenario_name": "Interested Buyer",
+    "difficulty_level": "easy",
+    "overall_score": 97.5,
+    "total_turns": 6,
+    "goal_completed": 1,
+    "created_at": "2026-06-09 03:46:07"
+  },
+  {
+    "id": 19,
+    "scenario_id": 1,
+    "scenario_name": "Interested Buyer",
+    "difficulty_level": "easy",
+    "overall_score": 53.5,
+    "total_turns": 1,
+    "goal_completed": 0,
+    "created_at": "2026-06-09 03:40:14"
+  },
+  {
+    "id": 18,
+    "scenario_id": 6,
+    "scenario_name": "Competitor Mention",
+    "difficulty_level": "medium",
+    "overall_score": 21.5,
+    "total_turns": 6,
+    "goal_completed": 0,
+    "created_at": "2026-06-08 03:47:26"
+  },
+  {
+    "id": 17,
+    "scenario_id": 6,
+    "scenario_name": "Competitor Mention",
+    "difficulty_level": "medium",
+    "overall_score": 64.0,
+    "total_turns": 10,
+    "goal_completed": 1,
+    "created_at": "2026-06-07 10:24:26"
+  },
+  {
+    "id": 16,
+    "scenario_id": 6,
+    "scenario_name": "Competitor Mention",
+    "difficulty_level": "medium",
+    "overall_score": 91.7,
+    "total_turns": 6,
+    "goal_completed": 1,
+    "created_at": "2026-06-06 09:01:26"
+  },
+  {
+    "id": 15,
+    "scenario_id": 5,
+    "scenario_name": "Off-Topic Wanderer",
+    "difficulty_level": "medium",
+    "overall_score": 39.2,
+    "total_turns": 8,
+    "goal_completed": 0,
+    "created_at": "2026-06-05 14:38:26"
+  },
+  {
+    "id": 14,
+    "scenario_id": 5,
+    "scenario_name": "Off-Topic Wanderer",
+    "difficulty_level": "medium",
+    "overall_score": 74.2,
+    "total_turns": 10,
+    "goal_completed": 1,
+    "created_at": "2026-06-04 21:15:26"
+  },
+  {
+    "id": 13,
+    "scenario_id": 5,
+    "scenario_name": "Off-Topic Wanderer",
+    "difficulty_level": "medium",
+    "overall_score": 88.4,
+    "total_turns": 8,
+    "goal_completed": 1,
+    "created_at": "2026-06-04 03:52:26"
+  },
+  {
+    "id": 12,
+    "scenario_id": 4,
+    "scenario_name": "Impatient Executive",
+    "difficulty_level": "hard",
+    "overall_score": 75.2,
+    "total_turns": 8,
+    "goal_completed": 1,
+    "created_at": "2026-06-03 10:29:26"
+  },
+  {
+    "id": 11,
+    "scenario_id": 4,
+    "scenario_name": "Impatient Executive",
+    "difficulty_level": "hard",
+    "overall_score": 19.8,
+    "total_turns": 6,
+    "goal_completed": 0,
+    "created_at": "2026-06-02 16:06:26"
+  },
+  {
+    "id": 10,
+    "scenario_id": 4,
+    "scenario_name": "Impatient Executive",
+    "difficulty_level": "hard",
+    "overall_score": 91.1,
+    "total_turns": 6,
+    "goal_completed": 1,
+    "created_at": "2026-06-01 22:43:26"
+  },
+  {
+    "id": 9,
+    "scenario_id": 3,
+    "scenario_name": "Angry Refund Demander",
+    "difficulty_level": "hard",
+    "overall_score": 21.5,
+    "total_turns": 8,
+    "goal_completed": 0,
+    "created_at": "2026-06-01 05:20:26"
+  },
+  {
+    "id": 8,
+    "scenario_id": 3,
+    "scenario_name": "Angry Refund Demander",
+    "difficulty_level": "hard",
+    "overall_score": 56.8,
+    "total_turns": 12,
+    "goal_completed": 1,
+    "created_at": "2026-05-31 02:57:26"
+  },
+  {
+    "id": 7,
+    "scenario_id": 3,
+    "scenario_name": "Angry Refund Demander",
+    "difficulty_level": "hard",
+    "overall_score": 88.9,
+    "total_turns": 8,
+    "goal_completed": 1,
+    "created_at": "2026-05-30 09:34:26"
+  },
+  {
+    "id": 6,
+    "scenario_id": 2,
+    "scenario_name": "Price Shopper",
+    "difficulty_level": "medium",
+    "overall_score": 28.2,
+    "total_turns": 8,
+    "goal_completed": 0,
+    "created_at": "2026-05-29 16:11:26"
+  },
+  {
+    "id": 5,
+    "scenario_id": 2,
+    "scenario_name": "Price Shopper",
+    "difficulty_level": "medium",
+    "overall_score": 64.0,
+    "total_turns": 10,
+    "goal_completed": 1,
+    "created_at": "2026-05-28 22:48:26"
+  },
+  {
+    "id": 4,
+    "scenario_id": 2,
+    "scenario_name": "Price Shopper",
+    "difficulty_level": "medium",
+    "overall_score": 89.0,
+    "total_turns": 8,
+    "goal_completed": 1,
+    "created_at": "2026-05-28 04:25:26"
+  },
+  {
+    "id": 3,
+    "scenario_id": 1,
+    "scenario_name": "Interested Buyer",
+    "difficulty_level": "easy",
+    "overall_score": 63.1,
+    "total_turns": 10,
+    "goal_completed": 1,
+    "created_at": "2026-05-27 11:02:26"
+  },
+  {
+    "id": 2,
+    "scenario_id": 1,
+    "scenario_name": "Interested Buyer",
+    "difficulty_level": "easy",
+    "overall_score": 78.2,
+    "total_turns": 10,
+    "goal_completed": 1,
+    "created_at": "2026-05-26 17:39:26"
+  },
+  {
+    "id": 1,
+    "scenario_id": 1,
+    "scenario_name": "Interested Buyer",
+    "difficulty_level": "easy",
+    "overall_score": 91.4,
+    "total_turns": 10,
+    "goal_completed": 1,
+    "created_at": "2026-05-26 00:16:26"
+  }
+]
