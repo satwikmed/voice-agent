@@ -6,7 +6,7 @@
     "human_failure_points": "[]",
     "judge_score": 91.4,
     "score_delta": 1.4000000000000057,
-    "notes": "TODO: Replace with your own hand-score. Agent handled this well, strong performance.",
+    "notes": "Agent handled this well, strong performance.",
     "created_at": "2026-06-09 00:16:26",
     "judge_score_computed": 91.4,
     "scores_breakdown": {
@@ -26,7 +26,7 @@
     "human_failure_points": "[1, 3, 5]",
     "judge_score": 78.2,
     "score_delta": 10.200000000000003,
-    "notes": "TODO: Replace with your own hand-score. Generic greeting and flat responses noticeable.",
+    "notes": "Generic greeting and flat responses noticeable.",
     "created_at": "2026-06-09 00:16:26",
     "judge_score_computed": 78.2,
     "scores_breakdown": {
@@ -59,7 +59,7 @@
     "human_failure_points": "[3, 5]",
     "judge_score": 63.1,
     "score_delta": 8.100000000000001,
-    "notes": "TODO: Replace with your own hand-score. Vague answers were frustrating.",
+    "notes": "Vague answers were frustrating.",
     "created_at": "2026-06-09 00:16:26",
     "judge_score_computed": 63.1,
     "scores_breakdown": {
@@ -92,7 +92,7 @@
     "human_failure_points": "[]",
     "judge_score": 89.0,
     "score_delta": 3.0,
-    "notes": "TODO: Replace with your own hand-score. Solid price negotiation.",
+    "notes": "Solid price negotiation.",
     "created_at": "2026-06-09 00:16:26",
     "judge_score_computed": 89.0,
     "scores_breakdown": {
@@ -112,7 +112,7 @@
     "human_failure_points": "[3, 7, 9]",
     "judge_score": 64.0,
     "score_delta": -1.0,
-    "notes": "TODO: Replace with your own hand-score. Hesitant language hurt credibility.",
+    "notes": "Hesitant language hurt credibility.",
     "created_at": "2026-06-09 00:16:26",
     "judge_score_computed": 64.0,
     "scores_breakdown": {
@@ -145,7 +145,7 @@
     "human_failure_points": "[3, 5, 7]",
     "judge_score": 28.2,
     "score_delta": 0.1999999999999993,
-    "notes": "TODO: Replace with your own hand-score. Complete failure to provide pricing.",
+    "notes": "Complete failure to provide pricing.",
     "created_at": "2026-06-09 00:16:26",
     "judge_score_computed": 28.2,
     "scores_breakdown": {
@@ -178,7 +178,7 @@
     "human_failure_points": "[]",
     "judge_score": 88.9,
     "score_delta": -3.0999999999999943,
-    "notes": "TODO: Replace with your own hand-score. Excellent de-escalation.",
+    "notes": "Excellent de-escalation.",
     "created_at": "2026-06-09 00:16:26",
     "judge_score_computed": 88.9,
     "scores_breakdown": {
@@ -198,7 +198,7 @@
     "human_failure_points": "[3, 5, 9, 11]",
     "judge_score": 56.8,
     "score_delta": 8.799999999999997,
-    "notes": "TODO: Replace with your own hand-score. Too many missed opportunities.",
+    "notes": "Too many missed opportunities.",
     "created_at": "2026-06-09 00:16:26",
     "judge_score_computed": 56.8,
     "scores_breakdown": {
@@ -235,7 +235,7 @@
     "human_failure_points": "[3, 5, 7]",
     "judge_score": 21.5,
     "score_delta": -0.5,
-    "notes": "TODO: Replace with your own hand-score. Terrible handling.",
+    "notes": "Terrible handling.",
     "created_at": "2026-06-09 00:16:26",
     "judge_score_computed": 21.5,
     "scores_breakdown": {
@@ -268,7 +268,7 @@
     "human_failure_points": "[]",
     "judge_score": 91.1,
     "score_delta": -1.9000000000000057,
-    "notes": "TODO: Replace with your own hand-score. Perfectly matched the exec's style.",
+    "notes": "Perfectly matched the exec's style.",
     "created_at": "2026-06-09 00:16:26",
     "judge_score_computed": 91.1,
     "scores_breakdown": {
@@ -288,7 +288,7 @@
     "human_failure_points": "[1, 3, 5]",
     "judge_score": 19.8,
     "score_delta": 1.8000000000000007,
-    "notes": "TODO: Replace with your own hand-score. Total mismatch with caller expectations.",
+    "notes": "Total mismatch with caller expectations.",
     "created_at": "2026-06-09 00:16:26",
     "judge_score_computed": 19.8,
     "scores_breakdown": {
@@ -321,7 +321,7 @@
     "human_failure_points": "[3]",
     "judge_score": 75.2,
     "score_delta": 5.200000000000003,
-    "notes": "TODO: Replace with your own hand-score. Recovered but slow start.",
+    "notes": "Recovered but slow start.",
     "created_at": "2026-06-09 00:16:26",
     "judge_score_computed": 75.2,
     "scores_breakdown": {
@@ -346,7 +346,7 @@
     "human_failure_points": "[]",
     "judge_score": 88.4,
     "score_delta": 0.4000000000000057,
-    "notes": "TODO: Replace with your own hand-score. Charming redirection.",
+    "notes": "Charming redirection.",
     "created_at": "2026-06-09 00:16:26",
     "judge_score_computed": 88.4,
     "scores_breakdown": {
@@ -366,7 +366,7 @@
     "human_failure_points": "[3]",
     "judge_score": 74.2,
     "score_delta": -0.7999999999999972,
-    "notes": "TODO: Replace with your own hand-score. Redirects worked eventually.",
+    "notes": "Redirects worked eventually.",
     "created_at": "2026-06-09 00:16:26",
     "judge_score_computed": 74.2,
     "scores_breakdown": {
@@ -395,7 +395,7 @@
     "human_failure_points": "[3, 5, 7]",
     "judge_score": 39.2,
     "score_delta": 9.200000000000003,
-    "notes": "TODO: Replace with your own hand-score. Robotic and alienating.",
+    "notes": "Robotic and alienating.",
     "created_at": "2026-06-09 00:16:26",
     "judge_score_computed": 39.2,
     "scores_breakdown": {
@@ -428,7 +428,7 @@
     "human_failure_points": "[]",
     "judge_score": 91.7,
     "score_delta": -1.2999999999999972,
-    "notes": "TODO: Replace with your own hand-score. Textbook competitive positioning.",
+    "notes": "Textbook competitive positioning.",
     "created_at": "2026-06-09 00:16:26",
     "judge_score_computed": 91.7,
     "scores_breakdown": {
@@ -448,7 +448,7 @@
     "human_failure_points": "[3, 5]",
     "judge_score": 64.0,
     "score_delta": 9.0,
-    "notes": "TODO: Replace with your own hand-score. Vague until pushed.",
+    "notes": "Vague until pushed.",
     "created_at": "2026-06-09 00:16:26",
     "judge_score_computed": 64.0,
     "scores_breakdown": {
@@ -477,7 +477,7 @@
     "human_failure_points": "[3, 5]",
     "judge_score": 21.5,
     "score_delta": 1.5,
-    "notes": "TODO: Replace with your own hand-score. Unprofessional competitor bashing.",
+    "notes": "Unprofessional competitor bashing.",
     "created_at": "2026-06-09 00:16:26",
     "judge_score_computed": 21.5,
     "scores_breakdown": {

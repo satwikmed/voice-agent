@@ -46,7 +46,7 @@ export default function LandingPage() {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] text-cyan-400 uppercase tracking-widest font-bold backdrop-blur-sm"
           >
-            <span>✨</span> Testing Voice AI, Dumbed Down
+            <span>✨</span> Built for Retell AI voice agents
           </motion.div>
 
           <motion.h1 
@@ -67,8 +67,9 @@ export default function LandingPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-base md:text-lg text-white/60 max-w-2xl mx-auto leading-relaxed"
           >
-            If you build a smart AI voice bot to handle customer calls, you can't sit and call it 10,000 times to check for errors. 
-            VoiceIQ creates virtual callers to test your bot for you, then grades the call like a human teacher.
+            VoiceIQ tests Retell voice agents <em>before</em> they go live — scripted
+            caller personas, LLM-as-judge scoring, and a deploy gate. Retell Assure
+            covers post-launch. Together that&apos;s the full quality loop.
           </motion.p>
 
           <motion.div 
@@ -84,6 +85,25 @@ export default function LandingPage() {
               🚀 Launch Simulator App
             </Link>
           </motion.div>
+        </section>
+
+        {/* Retell lifecycle */}
+        <section className="space-y-6">
+          <h2 className="text-2xl font-bold tracking-tight text-white/90">Before launch + after launch</h2>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div className="rounded-2xl border border-cyan-500/20 bg-white/5 p-6 text-left backdrop-blur-md">
+              <p className="label-muted mb-2 text-[10px] uppercase tracking-widest text-cyan-400">Pre-production · VoiceIQ</p>
+              <p className="text-xs leading-relaxed text-white/50">
+                Scenario suites, coverage heatmaps, Retell prompt import, and a deploy gate — ship only when your agent passes.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-orange-500/20 bg-white/5 p-6 text-left backdrop-blur-md">
+              <p className="mb-2 text-[10px] uppercase tracking-widest text-orange-400">Post-production · Retell Assure</p>
+              <p className="text-xs leading-relaxed text-white/50">
+                Retell&apos;s own QA layer monitors live calls. VoiceIQ is the missing pre-launch half of that story.
+              </p>
+            </div>
+          </div>
         </section>
 
         {/* Explain the Flow (Steps) */}
@@ -169,7 +189,7 @@ export default function LandingPage() {
       </main>
 
       <footer className="mt-20 border-t border-white/5 pt-8 text-center text-[10px] text-white/30 uppercase tracking-widest relative z-20">
-        VoiceIQ © 2026 · Built with Next.js, Tailwind, & Framer Motion
+        VoiceIQ © 2026 · Built for Retell AI · Not affiliated with Retell
       </footer>
     </div>
   )
