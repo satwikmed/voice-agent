@@ -1,17 +1,17 @@
 "use client"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
+import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { MeshGradient, PulsingBorder } from "@paper-design/shaders-react"
+import { DeployGateBanner } from "@/components/portal/deploy-gate-banner"
+import { CoveragePanel } from "@/components/portal/coverage-panel"
+import { BatchPanel, type BatchResult } from "@/components/portal/batch-panel"
+import { RetellPanel } from "@/components/portal/retell-panel"
+import { evaluateDeployGate } from "@/lib/deploy-gate"
+import coverageCategories from "@/data/coverage-categories.json"
+import type { CoverageCategory, Scenario as ScenarioType } from "@/lib/types"
 
-// Types matching database schema
-interface Scenario {
-  id: number
-  scenario_name: string
-  scenario_description: string
-  caller_personality: string
-  caller_goal: string
-  difficulty_level: string
-}
+type Scenario = ScenarioType
 
 interface TestRun {
   id: number
@@ -55,18 +55,32 @@ interface CalibrationPair {
   scenario_name: string
 }
 
+type PortalTab =
+  | "suite"
+  | "coverage"
+  | "retell"
+  | "calibration"
+  | "history"
+  | "scenarios"
+  | "simulate"
+
 export default function VoiceIQPortal() {
-  const [activeTab, setActiveTab] = useState<"calibration" | "history" | "scenarios" | "simulate">("calibration")
+  const [activeTab, setActiveTab] = useState<PortalTab>("suite")
   const [runs, setRuns] = useState<TestRun[]>([])
   const [scenarios, setScenarios] = useState<Scenario[]>([])
   const [calibrationData, setCalibrationData] = useState<CalibrationPair[]>([])
   const [selectedRunId, setSelectedRunId] = useState<number | null>(null)
   const [runDetail, setRunDetail] = useState<RunDetail | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
+  const [batchResults, setBatchResults] = useState<BatchResult[]>([])
 
-  // Live simulation states
   const [agentPrompt, setAgentPrompt] = useState<string>(
-    "You are a professional AI sales representative for TechFlow, a B2B SaaS platform.\nBe helpful, professional, and empathetic. Answer questions directly.\nPricing: Starter $29/seat/mo, Professional $79/seat/mo, Enterprise $149/seat/mo."
+    "You are a Retell AI voice agent for TechFlow, a B2B SaaS platform.\n" +
+      "Speak concisely like a phone agent — short sentences, no markdown.\n" +
+      "Be helpful, professional, and empathetic. Answer questions directly.\n" +
+      "Pricing: Starter $29/seat/mo, Professional $79/seat/mo, Enterprise $149/seat/mo.\n" +
+      "If the caller is frustrated, acknowledge before troubleshooting.\n" +
+      "Never promise refunds you cannot authorize — offer escalation paths instead."
   )
   const [selectedScenarioId, setSelectedScenarioId] = useState<number>(1)
   const [simulating, setSimulating] = useState<boolean>(false)
@@ -186,6 +200,35 @@ export default function VoiceIQPortal() {
     ? (calibrationData.reduce((acc, curr) => acc + curr.human_score, 0) / calibrationData.length).toFixed(1)
     : "N/A"
 
+  const deployGate = useMemo(
+    () =>
+      evaluateDeployGate(
+        scenarios,
+        runs,
+        batchResults.map((r) => ({
+          scenario_id: r.scenario_id,
+          overall_score: r.overall_score,
+        }))
+      ),
+    [scenarios, runs, batchResults]
+  )
+
+  const handleBatchComplete = (results: BatchResult[]) => {
+    setBatchResults(results)
+    // Persist batch summaries into local runs for coverage/history
+    const newRuns: TestRun[] = results.map((r, idx) => ({
+      id: 9000 + idx + Date.now(),
+      scenario_id: r.scenario_id,
+      scenario_name: r.scenario_name,
+      difficulty_level: r.difficulty_level,
+      overall_score: r.overall_score,
+      total_turns: r.total_turns,
+      goal_completed: r.goal_completed ? 1 : 0,
+      created_at: new Date().toISOString(),
+    }))
+    setRuns((prev) => [...newRuns, ...prev])
+  }
+
   const triggerSimulation = async () => {
     setSimulating(true)
     setSimResult(null)
@@ -269,29 +312,40 @@ export default function VoiceIQPortal() {
       </div>
 
       {/* Glassmorphic Header */}
-      <header className="relative z-20 flex items-center justify-between px-8 py-6 backdrop-blur-md border-b border-white/5 bg-black/30">
+      <header className="relative z-20 flex flex-col gap-4 border-b border-white/5 bg-black/30 px-8 py-6 backdrop-blur-md lg:flex-row lg:items-center lg:justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full flex items-center justify-center bg-cyan-500/20 border border-cyan-500/40">
-            <span className="text-cyan-400 font-black text-lg">V</span>
+          <div className="flex h-10 w-10 items-center justify-center rounded-full border border-cyan-500/40 bg-cyan-500/20">
+            <span className="text-lg font-black text-cyan-400">V</span>
           </div>
           <div>
-            <h1 className="text-xl font-bold tracking-tight bg-gradient-to-r from-cyan-400 via-white to-orange-400 bg-clip-text text-transparent">
+            <h1 className="bg-gradient-to-r from-cyan-400 via-white to-orange-400 bg-clip-text text-xl font-bold tracking-tight text-transparent">
               VoiceIQ Live Portal
             </h1>
-            <p className="text-[10px] text-white/50 tracking-wider uppercase font-semibold">Testing Harness Dashboard</p>
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-white/50">
+              Pre-launch eval for Retell AI voice agents
+            </p>
           </div>
         </div>
 
-        {/* Dynamic Navigation */}
-        <nav className="flex space-x-1 p-1 bg-white/5 rounded-full border border-white/10">
-          {(["calibration", "simulate", "history", "scenarios"] as const).map((tab) => (
+        <nav className="flex flex-wrap gap-1 rounded-full border border-white/10 bg-white/5 p-1">
+          {(
+            [
+              "suite",
+              "coverage",
+              "retell",
+              "simulate",
+              "calibration",
+              "history",
+              "scenarios",
+            ] as PortalTab[]
+          ).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-4 py-1.5 rounded-full text-xs font-medium uppercase tracking-wider transition-all duration-300 ${
-                activeTab === tab 
-                  ? "bg-gradient-to-r from-cyan-500 to-orange-500 text-white shadow-lg" 
-                  : "text-white/70 hover:text-white hover:bg-white/5"
+              className={`rounded-full px-3 py-1.5 text-[10px] font-medium uppercase tracking-wider transition-all duration-300 ${
+                activeTab === tab
+                  ? "bg-gradient-to-r from-cyan-500 to-orange-500 text-white shadow-lg"
+                  : "text-white/70 hover:bg-white/5 hover:text-white"
               }`}
             >
               {tab}
@@ -299,13 +353,20 @@ export default function VoiceIQPortal() {
           ))}
         </nav>
 
-        {/* Status Indicator */}
-        <div className="flex items-center gap-2">
-          <div className="relative w-3 h-3">
-            <span className="absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75 animate-ping"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/"
+            className="text-[10px] font-semibold uppercase tracking-wider text-white/40 hover:text-white"
+          >
+            ← Home
+          </Link>
+          <div className="flex items-center gap-2">
+            <div className="relative h-3 w-3">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75"></span>
+              <span className="relative inline-flex h-3 w-3 rounded-full bg-cyan-500"></span>
+            </div>
+            <span className="text-xs font-medium text-cyan-400">DEMO READY</span>
           </div>
-          <span className="text-xs text-cyan-400 font-medium">LIVE DATABASE</span>
         </div>
       </header>
 
@@ -313,12 +374,60 @@ export default function VoiceIQPortal() {
       <main className="relative z-10 max-w-7xl mx-auto px-8 mt-10">
         
         {loading ? (
-          <div className="h-64 flex flex-col items-center justify-center gap-4">
-            <div className="w-10 h-10 border-4 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin"></div>
-            <p className="text-xs text-white/50">Fetching simulation logs from SQLite database...</p>
+          <div className="flex h-64 flex-col items-center justify-center gap-4">
+            <div className="h-10 w-10 animate-spin rounded-full border-4 border-cyan-500/20 border-t-cyan-500"></div>
+            <p className="text-xs text-white/50">Loading scenario library and calibration data…</p>
           </div>
         ) : (
-          <AnimatePresence mode="wait">
+          <>
+            <DeployGateBanner gate={deployGate} />
+            <AnimatePresence mode="wait">
+            {activeTab === "suite" && (
+              <motion.div
+                key="suite"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.3 }}
+              >
+                <BatchPanel
+                  scenarios={scenarios}
+                  agentPrompt={agentPrompt}
+                  onComplete={handleBatchComplete}
+                />
+              </motion.div>
+            )}
+
+            {activeTab === "coverage" && (
+              <motion.div
+                key="coverage"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.3 }}
+              >
+                <CoveragePanel
+                  categories={coverageCategories as CoverageCategory[]}
+                  scenarios={scenarios}
+                  runs={runs}
+                />
+              </motion.div>
+            )}
+
+            {activeTab === "retell" && (
+              <motion.div
+                key="retell"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.3 }}
+              >
+                <RetellPanel
+                  agentPrompt={agentPrompt}
+                  onImportPrompt={(prompt) => setAgentPrompt(prompt)}
+                />
+              </motion.div>
+            )}
             {activeTab === "calibration" && (
               <motion.div
                 key="calibration"
@@ -792,6 +901,7 @@ export default function VoiceIQPortal() {
               </motion.div>
             )}
           </AnimatePresence>
+          </>
         )}
       </main>
     </div>

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "sales_discovery",
+    "label": "Sales & Discovery",
+    "description": "Warm inbound interest, feature questions, and next-step qualification."
+  },
+  {
+    "id": "pricing_negotiation",
+    "label": "Pricing & Negotiation",
+    "description": "Cost pressure, discount requests, and competitive price anchoring."
+  },
+  {
+    "id": "de_escalation",
+    "label": "De-escalation",
+    "description": "Angry callers, refund demands, and policy-bound recovery."
+  },
+  {
+    "id": "executive_brevity",
+    "label": "Executive Brevity",
+    "description": "Time-boxed buyers who punish filler and slow discovery."
+  },
+  {
+    "id": "conversation_control",
+    "label": "Conversation Control",
+    "description": "Off-topic callers, interruptions, and flow management."
+  },
+  {
+    "id": "competitive_positioning",
+    "label": "Competitive Positioning",
+    "description": "Differentiation without trash-talking named competitors."
+  },
+  {
+    "id": "healthcare_scheduling",
+    "label": "Healthcare Scheduling",
+    "description": "Appointment booking, insurance verification, and HIPAA-aware intake."
+  },
+  {
+    "id": "insurance_intake",
+    "label": "Insurance Intake",
+    "description": "Claim status, policy lookup, and compliance-sensitive routing."
+  },
+  {
+    "id": "retell_support",
+    "label": "Retell Platform Support",
+    "description": "Developer onboarding, API troubleshooting, and deployment guidance."
+  }
+]
