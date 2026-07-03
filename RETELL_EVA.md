@@ -59,6 +59,12 @@ EVA-Bench (HF) → retell_eva/loader → VoiceIQ simulator → LLM judge → EVA
                                     Retell agent prompt (domain-specific)
 ```
 
+## Live demo
+
+- **Portal:** https://voice-agent-amber-nine.vercel.app/portal → RetellEVA tab
+- **GitHub:** https://github.com/satwikmed/voice-agent
+- **HF Space:** https://huggingface.co/spaces/satwikmed/retell-eva (deploy with `HF_TOKEN=... python scripts/deploy_hf_space.py`)
+
 ## Outreach to Retell AI
 
 **Subject:** Open-source EVA-Bench adapter for Retell — pre-launch QA results

@@ -19,7 +19,9 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from retell_eva.loader import load_eva_scenarios  # noqa: E402
 from retell_eva.scorer import aggregate_benchmark  # noqa: E402
 
-SEED_PATH = PROJECT_ROOT / "frontend" / "src" / "data" / "eva-benchmark-results.json"
+SEED_PATH = Path(__file__).resolve().parent / "frontend" / "src" / "data" / "eva-benchmark-results.json"
+if not SEED_PATH.exists():
+    SEED_PATH = Path(__file__).resolve().parent.parent / "frontend" / "src" / "data" / "eva-benchmark-results.json"
 
 st.set_page_config(page_title="RetellEVA", page_icon="🎙️", layout="wide")
 
