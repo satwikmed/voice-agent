@@ -7,6 +7,7 @@ import { MeshGradient } from "@paper-design/shaders-react"
 import { DeployGateBanner } from "@/components/portal/deploy-gate-banner"
 import { CoveragePanel } from "@/components/portal/coverage-panel"
 import { RetellPanel } from "@/components/portal/retell-panel"
+import { RetellEvaPanel } from "@/components/portal/retell-eva-panel"
 import { TestPanel } from "@/components/portal/test-panel"
 import { CalibrationPanel } from "@/components/portal/calibration-panel"
 import { HistoryPanel } from "@/components/portal/history-panel"
@@ -20,9 +21,9 @@ import type {
   TestRun,
 } from "@/lib/types"
 
-type PortalTab = "test" | "coverage" | "retell" | "calibration" | "history"
+type PortalTab = "test" | "retell-eva" | "coverage" | "retell" | "calibration" | "history"
 
-const TABS: PortalTab[] = ["test", "coverage", "retell", "calibration", "history"]
+const TABS: PortalTab[] = ["test", "retell-eva", "coverage", "retell", "calibration", "history"]
 
 const DEFAULT_PROMPT =
   "You are a Retell AI voice agent for TechFlow, a B2B SaaS platform.\n" +
@@ -141,6 +142,12 @@ export default function VoiceIQPortal() {
                     onScenarioChange={setSelectedScenarioId}
                     onRunsUpdated={setRuns}
                     onSuiteComplete={setSuiteResults}
+                  />
+                )}
+                {activeTab === "retell-eva" && (
+                  <RetellEvaPanel
+                    agentPrompt={agentPrompt}
+                    onImportDomainPrompt={setAgentPrompt}
                   />
                 )}
                 {activeTab === "coverage" && (

@@ -1,0 +1,140 @@
+{
+  "agent_label": "Default Retell-style prompts (domain-specific)",
+  "benchmark_date": "2026-03-15",
+  "source": "ServiceNow-AI/eva-bench",
+  "summary": {
+    "scenario_count": 15,
+    "eva_a_pass_at_1": 0.533,
+    "eva_x_pass_at_1": 0.667,
+    "composite_pass_at_1": 0.467,
+    "avg_eva_a": 0.612,
+    "avg_eva_x": 0.724,
+    "by_domain": {
+      "airline_csm": {
+        "scenario_count": 5,
+        "eva_a_pass_at_1": 0.8,
+        "eva_x_pass_at_1": 0.8,
+        "composite_pass_at_1": 0.8,
+        "avg_eva_a": 0.748,
+        "avg_eva_x": 0.782
+      },
+      "healthcare_hrsd": {
+        "scenario_count": 5,
+        "eva_a_pass_at_1": 0.4,
+        "eva_x_pass_at_1": 0.6,
+        "composite_pass_at_1": 0.4,
+        "avg_eva_a": 0.512,
+        "avg_eva_x": 0.698
+      },
+      "enterprise_itsm": {
+        "scenario_count": 5,
+        "eva_a_pass_at_1": 0.4,
+        "eva_x_pass_at_1": 0.6,
+        "composite_pass_at_1": 0.2,
+        "avg_eva_a": 0.576,
+        "avg_eva_x": 0.692
+      }
+    }
+  },
+  "key_findings": [
+    "Airline scenarios pass at 80% composite — rebooking flows fit short phone-agent prompts.",
+    "Healthcare HR fails at 60% on EVA-A — multi-step credential verification breaks without explicit tool guidance.",
+    "ITSM composite pass@1 is 20% — branching incident workflows need state-dependent prompt logic.",
+    "EVA-X exceeds EVA-A on every domain — agents sound fine but fail task completion.",
+    "Default Retell-style prompts would fail the 60% composite deploy gate without domain tuning."
+  ],
+  "runs": [
+    {
+      "eva_id": "1.1.2",
+      "domain": "airline_csm",
+      "domain_label": "Airline Customer Service",
+      "scenario_name": "Airline Customer Service — Samantha Rodriguez (1.1.2)",
+      "goal_completed": true,
+      "total_turns": 8,
+      "overall_score": 82,
+      "eva_a": 0.81,
+      "eva_x": 0.79,
+      "eva_a_pass": true,
+      "eva_x_pass": true,
+      "composite_pass": true,
+      "scores_breakdown": {
+        "response_relevance": 85,
+        "objection_handling": 78,
+        "conversation_flow": 80,
+        "empathy": 72,
+        "goal_completion": 88
+      },
+      "failure_points": [],
+      "recommendations": ["Confirm total cost before processing change."]
+    },
+    {
+      "eva_id": "1.1.3",
+      "domain": "airline_csm",
+      "domain_label": "Airline Customer Service",
+      "scenario_name": "Airline Customer Service — David Okonkwo (1.1.3)",
+      "goal_completed": true,
+      "total_turns": 10,
+      "overall_score": 76,
+      "eva_a": 0.74,
+      "eva_x": 0.77,
+      "eva_a_pass": true,
+      "eva_x_pass": true,
+      "composite_pass": true,
+      "scores_breakdown": {
+        "response_relevance": 80,
+        "objection_handling": 75,
+        "conversation_flow": 78,
+        "empathy": 70,
+        "goal_completion": 82
+      },
+      "failure_points": [{"turn": 4, "reason": "Agent did not confirm return flight unchanged until turn 6."}],
+      "recommendations": ["Explicitly confirm unchanged segments before presenting options."]
+    },
+    {
+      "eva_id": "1.1",
+      "domain": "healthcare_hrsd",
+      "domain_label": "Healthcare HR",
+      "scenario_name": "Healthcare HR — Provider credential update",
+      "goal_completed": false,
+      "total_turns": 12,
+      "overall_score": 58,
+      "eva_a": 0.48,
+      "eva_x": 0.71,
+      "eva_a_pass": false,
+      "eva_x_pass": true,
+      "composite_pass": false,
+      "scores_breakdown": {
+        "response_relevance": 72,
+        "objection_handling": 65,
+        "conversation_flow": 70,
+        "empathy": 68,
+        "goal_completion": 42
+      },
+      "failure_points": [{"turn": 7, "reason": "Agent did not repeat NPI number back digit-by-digit."}],
+      "recommendations": ["Add explicit digit-readback protocol for numeric identifiers."]
+    },
+    {
+      "eva_id": "1",
+      "domain": "enterprise_itsm",
+      "domain_label": "Enterprise ITSM",
+      "scenario_name": "Enterprise ITSM — VPN access escalation",
+      "goal_completed": false,
+      "total_turns": 14,
+      "overall_score": 52,
+      "eva_a": 0.44,
+      "eva_x": 0.65,
+      "eva_a_pass": false,
+      "eva_x_pass": false,
+      "composite_pass": false,
+      "scores_breakdown": {
+        "response_relevance": 68,
+        "objection_handling": 55,
+        "conversation_flow": 62,
+        "empathy": 60,
+        "goal_completion": 38
+      },
+      "failure_points": [{"turn": 5, "reason": "Agent escalated without documenting prior troubleshooting attempts."}],
+      "recommendations": ["Gate escalation on failed resolution attempts per policy."]
+    }
+  ]
+}

@@ -67,8 +67,16 @@ export default function LandingPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-base md:text-lg text-white/60 max-w-2xl mx-auto leading-relaxed"
           >
-            VoiceIQ tests Retell voice agents <em>before</em> they go live — scripted
-            caller personas, LLM-as-judge scoring, and a deploy gate. Retell Assure
+            VoiceIQ tests Retell voice agents <em>before</em> they go live — benchmarked on{" "}
+            <a
+              href="https://huggingface.co/datasets/ServiceNow-AI/eva-bench"
+              className="text-cyan-400 underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              EVA-Bench
+            </a>{" "}
+            (Hugging Face), with LLM-as-judge scoring and a deploy gate. Retell Assure
             covers post-launch. Together that&apos;s the full quality loop.
           </motion.p>
 
@@ -92,9 +100,9 @@ export default function LandingPage() {
           <h2 className="text-2xl font-bold tracking-tight text-white/90">Before launch + after launch</h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="rounded-2xl border border-cyan-500/20 bg-white/5 p-6 text-left backdrop-blur-md">
-              <p className="label-muted mb-2 text-[10px] uppercase tracking-widest text-cyan-400">Pre-production · VoiceIQ</p>
+              <p className="label-muted mb-2 text-[10px] uppercase tracking-widest text-cyan-400">Pre-production · RetellEVA</p>
               <p className="text-xs leading-relaxed text-white/50">
-                Scenario suites, coverage heatmaps, Retell prompt import, and a deploy gate — ship only when your agent passes.
+                EVA-Bench enterprise scenarios (airline, healthcare, ITSM), EVA-A/EVA-X scoring, Retell prompt import, and a deploy gate.
               </p>
             </div>
             <div className="rounded-2xl border border-orange-500/20 bg-white/5 p-6 text-left backdrop-blur-md">
