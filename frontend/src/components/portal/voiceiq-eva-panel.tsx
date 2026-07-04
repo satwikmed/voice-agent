@@ -10,6 +10,8 @@ import {
   type EvaRunResult,
   type EvaScenario,
 } from "@/lib/voiceiq-eva"
+import { downloadRetellExport } from "@/lib/retell-export"
+import Link from "next/link"
 
 interface VoiceIQEvaPanelProps {
   agentPrompt: string
@@ -145,6 +147,12 @@ export function VoiceIQEvaPanel({
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
+            <Link
+              href="/cert"
+              className="rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-emerald-300"
+            >
+              🏆 EVA Certified
+            </Link>
             {DOMAINS.map((d) => (
               <button
                 key={d.id}
@@ -229,7 +237,19 @@ export function VoiceIQEvaPanel({
                 }
                 className="text-cyan-400 underline"
               >
-                Import domain Retell prompt
+                Import domain voice-agent prompt
+              </button>
+              <button
+                onClick={() =>
+                  downloadRetellExport(
+                    agentPrompt || DOMAIN_AGENT_PROMPTS[selectedScenario.domain],
+                    selectedScenario.domain,
+                    `voiceiq-eva-${selectedScenario.domain}.json`
+                  )
+                }
+                className="ml-4 text-orange-400 underline"
+              >
+                Export Retell LLM JSON
               </button>
             </div>
           )}

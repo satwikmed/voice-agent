@@ -84,13 +84,25 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="pt-6 flex justify-center gap-4"
+            className="pt-6 flex flex-wrap justify-center gap-4"
           >
             <Link
-              href="/portal"
+              href="/retell"
               className="px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-orange-500 text-white font-bold text-xs uppercase tracking-widest transition duration-300 hover:shadow-lg hover:shadow-cyan-500/20 transform hover:-translate-y-0.5"
             >
-              🚀 Launch Simulator App
+              🎯 For Retell — The Assure Gap
+            </Link>
+            <Link
+              href="/cert"
+              className="px-8 py-4 rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-300 font-bold text-xs uppercase tracking-widest transition duration-300 hover:bg-emerald-500/20"
+            >
+              🏆 EVA Certified — 100%
+            </Link>
+            <Link
+              href="/portal"
+              className="px-8 py-4 rounded-xl border border-white/20 bg-white/5 text-white/80 font-bold text-xs uppercase tracking-widest transition duration-300 hover:bg-white/10"
+            >
+              Launch Simulator
             </Link>
           </motion.div>
         </section>

@@ -1,0 +1,33 @@
+name: VoiceIQ EVA
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install pytest openai python-dotenv huggingface_hub
+
+      - name: Run VoiceIQ EVA tests
+        run: pytest tests/test_voiceiq_eva.py -v
+
+      - name: Verify bundled scenarios
+        run: |
+          python3 -c "
+          from voiceiq_eva.loader import load_eva_scenarios
+          s = load_eva_scenarios()
+          assert len(s) == 15
+          assert all(x.persona_prompt.strip() for x in s)
+          print('15 EVA scenarios OK')
+          "

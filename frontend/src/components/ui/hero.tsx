@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { MeshGradient } from "@paper-design/shaders-react"
 import { DeployGateBanner } from "@/components/portal/deploy-gate-banner"
@@ -43,7 +44,11 @@ const DEFAULT_PROMPT =
   "Never promise refunds you cannot authorize — offer escalation paths instead."
 
 export default function VoiceIQPortal() {
-  const [activeTab, setActiveTab] = useState<PortalTab>("test")
+  const searchParams = useSearchParams()
+  const tabParam = searchParams.get("tab")
+  const initialTab: PortalTab =
+    tabParam === "voiceiq-eva" ? "voiceiq-eva" : "test"
+  const [activeTab, setActiveTab] = useState<PortalTab>(initialTab)
   const [loading, setLoading] = useState(true)
   const [runs, setRuns] = useState<TestRun[]>([])
   const [scenarios, setScenarios] = useState<Scenario[]>([])
