@@ -1,5 +1,5 @@
 {
-  "agent_label": "RetellEVA scenario-grounded prompts (live)",
+  "agent_label": "VoiceIQ EVA scenario-grounded prompts (live)",
   "benchmark_date": "2026-07-03",
   "source": "ServiceNow-AI/eva-bench",
   "summary": {

@@ -7,7 +7,7 @@ import { MeshGradient } from "@paper-design/shaders-react"
 import { DeployGateBanner } from "@/components/portal/deploy-gate-banner"
 import { CoveragePanel } from "@/components/portal/coverage-panel"
 import { RetellPanel } from "@/components/portal/retell-panel"
-import { RetellEvaPanel } from "@/components/portal/retell-eva-panel"
+import { VoiceIQEvaPanel } from "@/components/portal/voiceiq-eva-panel"
 import { TestPanel } from "@/components/portal/test-panel"
 import { CalibrationPanel } from "@/components/portal/calibration-panel"
 import { HistoryPanel } from "@/components/portal/history-panel"
@@ -21,9 +21,18 @@ import type {
   TestRun,
 } from "@/lib/types"
 
-type PortalTab = "test" | "retell-eva" | "coverage" | "retell" | "calibration" | "history"
+type PortalTab = "test" | "voiceiq-eva" | "coverage" | "retell" | "calibration" | "history"
 
-const TABS: PortalTab[] = ["test", "retell-eva", "coverage", "retell", "calibration", "history"]
+const TABS: PortalTab[] = ["test", "voiceiq-eva", "coverage", "retell", "calibration", "history"]
+
+const TAB_LABELS: Record<PortalTab, string> = {
+  test: "test",
+  "voiceiq-eva": "VoiceIQ EVA",
+  coverage: "coverage",
+  retell: "retell",
+  calibration: "calibration",
+  history: "history",
+}
 
 const DEFAULT_PROMPT =
   "You are a Retell AI voice agent for TechFlow, a B2B SaaS platform.\n" +
@@ -110,7 +119,7 @@ export default function VoiceIQPortal() {
                   : "text-white/70 hover:text-white"
               }`}
             >
-              {tab}
+              {TAB_LABELS[tab]}
             </button>
           ))}
         </nav>
@@ -144,8 +153,8 @@ export default function VoiceIQPortal() {
                     onSuiteComplete={setSuiteResults}
                   />
                 )}
-                {activeTab === "retell-eva" && (
-                  <RetellEvaPanel
+                {activeTab === "voiceiq-eva" && (
+                  <VoiceIQEvaPanel
                     agentPrompt={agentPrompt}
                     onImportDomainPrompt={setAgentPrompt}
                   />

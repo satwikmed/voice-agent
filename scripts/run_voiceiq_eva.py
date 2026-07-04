@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""RetellEVA CLI — run EVA-Bench scenarios against Retell-style agent prompts."""
+"""VoiceIQ EVA CLI — run EVA-Bench scenarios against Retell-style agent prompts."""
 
 from __future__ import annotations
 
@@ -12,12 +12,12 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from retell_eva.runner import run_eva_benchmark_sync  # noqa: E402
+from voiceiq_eva.runner import run_eva_benchmark_sync  # noqa: E402
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="RetellEVA: pre-launch QA for Retell agents on EVA-Bench scenarios",
+        description="VoiceIQ EVA: pre-launch QA for Retell agents on EVA-Bench scenarios",
     )
     parser.add_argument(
         "--domain",
@@ -46,7 +46,7 @@ def main() -> None:
     )
 
     summary = results["summary"]
-    print("\n=== RetellEVA Benchmark Summary ===")
+    print("\n=== VoiceIQ EVA Benchmark Summary ===")
     print(f"Scenarios: {summary['scenario_count']}")
     print(f"EVA-A pass@1: {summary['eva_a_pass_at_1']:.1%}")
     print(f"EVA-X pass@1: {summary['eva_x_pass_at_1']:.1%}")

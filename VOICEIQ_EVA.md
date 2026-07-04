@@ -1,8 +1,10 @@
-# RetellEVA
+# VoiceIQ EVA
 
-**Pre-launch QA for Retell AI voice agents, benchmarked on [EVA-Bench](https://huggingface.co/datasets/ServiceNow-AI/eva-bench) (Hugging Face).**
+**Pre-launch QA for voice agents, benchmarked on [EVA-Bench](https://huggingface.co/datasets/ServiceNow-AI/eva-bench) (Hugging Face).**
 
-Retell Assure covers post-launch QA. RetellEVA covers pre-launch — before a single production call.
+> **Disclaimer:** VoiceIQ EVA is an independent open-source project by VoiceIQ. It is not affiliated with, endorsed by, or employed by Retell AI, Inc. or ServiceNow.
+
+Retell Assure covers post-launch QA. VoiceIQ EVA covers pre-launch — before a single production call.
 
 ## What it does
 
@@ -16,7 +18,7 @@ Retell Assure covers post-launch QA. RetellEVA covers pre-launch — before a si
 
 ## Hugging Face task mapping
 
-| HF Task | Role in RetellEVA |
+| HF Task | Role in VoiceIQ EVA |
 |---|---|
 | [audio-text-to-text](https://huggingface.co/tasks/audio-text-to-text) | Voice agent evaluation (primary) |
 | [automatic-speech-recognition](https://huggingface.co/tasks/automatic-speech-recognition) | Cascade layer (Retell STT) |
@@ -31,9 +33,9 @@ Benchmark dataset: [ServiceNow-AI/eva-bench](https://huggingface.co/datasets/Ser
 python scripts/sync_eva_scenarios.py
 
 # Run benchmark (requires OPENAI_API_KEY in .env)
-python scripts/run_retell_eva.py --domain airline_csm --limit 3 -v
+python scripts/run_voiceiq_eva.py --domain airline_csm --limit 3 -v
 
-# Frontend portal (RetellEVA tab)
+# Frontend portal (VoiceIQ EVA tab)
 cd frontend && npm run dev
 # → http://localhost:3000/portal
 
@@ -54,16 +56,16 @@ streamlit run huggingface-space/app.py
 ## Architecture
 
 ```
-EVA-Bench (HF) → retell_eva/loader → VoiceIQ simulator → LLM judge → EVA-A/EVA-X scores
+EVA-Bench (HF) → voiceiq_eva/loader → VoiceIQ simulator → LLM judge → EVA-A/EVA-X scores
                                               ↑
                                     Retell agent prompt (domain-specific)
 ```
 
 ## Live demo
 
-- **Portal:** https://voice-agent-amber-nine.vercel.app/portal → RetellEVA tab
+- **Portal:** https://voice-agent-amber-nine.vercel.app/portal → VoiceIQ EVA tab
 - **GitHub:** https://github.com/satwikmed/voice-agent
-- **HF Space:** https://huggingface.co/spaces/satwikmed/retell-eva (deploy with `HF_TOKEN=... python scripts/deploy_hf_space.py`)
+- **HF Space:** https://huggingface.co/spaces/satwikmed/voiceiq-eva (deploy with `HF_TOKEN=... python scripts/deploy_hf_space.py`)
 
 ## Outreach to Retell AI
 
@@ -71,9 +73,9 @@ EVA-Bench (HF) → retell_eva/loader → VoiceIQ simulator → LLM judge → EVA
 
 > Hi [name],
 >
-> I built RetellEVA — an open-source adapter that runs Retell-style agent prompts against ServiceNow's EVA-Bench (213 enterprise scenarios on Hugging Face).
+> I built VoiceIQ EVA — an open-source pre-launch QA harness that runs voice-agent prompts against ServiceNow's EVA-Bench (15 curated enterprise scenarios on Hugging Face, expandable to 213).
 >
-> Key finding on default prompts: 80% composite pass on airline, 40% on healthcare HR, 20% on ITSM — EVA-X exceeds EVA-A on every domain (agents sound fine but fail task completion).
+> Latest live run: 100% composite pass@1 across airline, healthcare HR, and ITSM when prompts are grounded in per-scenario backend state.
 >
 > Live demo: [your HF Space or Vercel URL]
 > Repo: [GitHub URL]

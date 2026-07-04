@@ -1,8 +1,8 @@
 """
-RetellEVA — Hugging Face Space entry point.
+VoiceIQ EVA — Hugging Face Space entry point.
 
 Minimal Streamlit demo for EVA-Bench pre-launch QA. Full UI lives in the
-Next.js portal (/portal → RetellEVA tab) or dashboard/app.py.
+Next.js portal (/portal → VoiceIQ EVA tab) or dashboard/app.py.
 """
 
 from __future__ import annotations
@@ -16,16 +16,16 @@ import streamlit as st
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from retell_eva.loader import load_eva_scenarios  # noqa: E402
-from retell_eva.scorer import aggregate_benchmark  # noqa: E402
+from voiceiq_eva.loader import load_eva_scenarios  # noqa: E402
+from voiceiq_eva.scorer import aggregate_benchmark  # noqa: E402
 
 SEED_PATH = Path(__file__).resolve().parent / "frontend" / "src" / "data" / "eva-benchmark-results.json"
 if not SEED_PATH.exists():
     SEED_PATH = Path(__file__).resolve().parent.parent / "frontend" / "src" / "data" / "eva-benchmark-results.json"
 
-st.set_page_config(page_title="RetellEVA", page_icon="🎙️", layout="wide")
+st.set_page_config(page_title="VoiceIQ EVA", page_icon="🎙️", layout="wide")
 
-st.title("RetellEVA")
+st.title("VoiceIQ EVA")
 st.caption(
     "Pre-launch QA for Retell AI voice agents · "
     "[EVA-Bench on Hugging Face](https://huggingface.co/datasets/ServiceNow-AI/eva-bench)"
@@ -63,5 +63,5 @@ for scenario in filtered[:5]:
 
 st.info(
     "Complements Retell Assure (post-launch). "
-    "Full benchmark runner: `python scripts/run_retell_eva.py`"
+    "Full benchmark runner: `python scripts/run_voiceiq_eva.py`"
 )

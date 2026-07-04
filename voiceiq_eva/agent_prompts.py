@@ -4,7 +4,7 @@ Domain-specific Retell agent system prompts for EVA-Bench evaluation.
 
 from __future__ import annotations
 
-from retell_eva.loader import EvaScenario
+from voiceiq_eva.loader import EvaScenario
 
 DOMAIN_AGENT_PROMPTS: dict[str, str] = {
     "airline_csm": """\

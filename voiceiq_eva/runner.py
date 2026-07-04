@@ -1,5 +1,5 @@
 """
-RetellEVA benchmark runner — simulate + judge + score EVA-Bench scenarios.
+VoiceIQ EVA benchmark runner — simulate + judge + score EVA-Bench scenarios.
 """
 
 from __future__ import annotations
@@ -9,9 +9,9 @@ import logging
 from dataclasses import asdict, dataclass
 from typing import Any
 
-from retell_eva.agent_prompts import build_eva_agent_prompt
-from retell_eva.loader import EvaScenario, load_eva_scenarios
-from retell_eva.scorer import aggregate_benchmark, score_eva_run
+from voiceiq_eva.agent_prompts import build_eva_agent_prompt
+from voiceiq_eva.loader import EvaScenario, load_eva_scenarios
+from voiceiq_eva.scorer import aggregate_benchmark, score_eva_run
 from simulator.agent_simulator import run_simulation
 from simulator.judge import evaluate_transcript
 from simulator.scenarios import Scenario

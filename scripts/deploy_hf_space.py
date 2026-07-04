@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create and upload RetellEVA Hugging Face Space for satwikmed."""
+"""Create and upload VoiceIQ EVA Hugging Face Space for satwikmed."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ import tempfile
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-SPACE_ID = os.environ.get("HF_SPACE_ID", "satwikmed/retell-eva")
+SPACE_ID = os.environ.get("HF_SPACE_ID", "satwikmed/voiceiq-eva")
 SPACE_DIR = PROJECT_ROOT / "huggingface-space"
 
 
@@ -27,29 +27,25 @@ def main() -> None:
     api.create_repo(
         repo_id=SPACE_ID,
         repo_type="space",
-        space_sdk="streamlit",
+        space_sdk="docker",
         exist_ok=True,
     )
 
     with tempfile.TemporaryDirectory() as tmp:
         dest = Path(tmp)
-        for name in ("app.py", "README.md"):
+        for name in ("app.py", "README.md", "Dockerfile", "requirements.txt"):
             shutil.copy(SPACE_DIR / name, dest / name)
 
         # Space needs project files for imports
         shutil.copytree(
-            PROJECT_ROOT / "retell_eva",
-            dest / "retell_eva",
+            PROJECT_ROOT / "voiceiq_eva",
+            dest / "voiceiq_eva",
             ignore=shutil.ignore_patterns("__pycache__", "*.pyc"),
         )
         results_src = PROJECT_ROOT / "frontend" / "src" / "data" / "eva-benchmark-results.json"
         data_dir = dest / "frontend" / "src" / "data"
         data_dir.mkdir(parents=True)
         shutil.copy(results_src, data_dir / "eva-benchmark-results.json")
-
-        requirements = """streamlit>=1.35.0
-"""
-        (dest / "requirements.txt").write_text(requirements, encoding="utf-8")
 
         # Patch app.py paths for space layout
         app_text = (dest / "app.py").read_text(encoding="utf-8")
@@ -63,7 +59,7 @@ def main() -> None:
             folder_path=str(dest),
             repo_id=SPACE_ID,
             repo_type="space",
-            commit_message="Deploy RetellEVA demo",
+            commit_message="Deploy VoiceIQ EVA demo",
         )
 
     print(f"Space live: https://huggingface.co/spaces/{SPACE_ID}")

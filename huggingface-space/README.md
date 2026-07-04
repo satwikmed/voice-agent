@@ -1,17 +1,16 @@
 ---
-title: RetellEVA
+title: VoiceIQ EVA
 emoji: 🎙️
-colorFrom: cyan
-colorTo: orange
-sdk: streamlit
-sdk_version: "1.35.0"
-app_file: app.py
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+app_port: 8501
 pinned: false
 license: mit
 short_description: Pre-launch QA for Retell agents on EVA-Bench
 ---
 
-# RetellEVA on Hugging Face Spaces
+# VoiceIQ EVA on Hugging Face Spaces
 
 Deploy the Streamlit dashboard from the repo root:
 
@@ -19,6 +18,6 @@ Deploy the Streamlit dashboard from the repo root:
 streamlit run dashboard/app.py
 ```
 
-Or use the Next.js portal at `/portal` (RetellEVA tab).
+Or use the Next.js portal at `/portal` (VoiceIQ EVA tab).
 
 Dataset: [ServiceNow-AI/eva-bench](https://huggingface.co/datasets/ServiceNow-AI/eva-bench)

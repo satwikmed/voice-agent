@@ -1,5 +1,5 @@
 """
-EVA-A (Accuracy) and EVA-X (Experience) scoring for RetellEVA runs.
+EVA-A (Accuracy) and EVA-X (Experience) scoring for VoiceIQ EVA runs.
 
 Aligned with ServiceNow EVA-Bench composite metrics, adapted for text-mode
 pre-launch evaluation of Retell agent prompts (Phase 1).

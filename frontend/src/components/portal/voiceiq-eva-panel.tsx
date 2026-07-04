@@ -9,9 +9,9 @@ import {
   type EvaBenchmarkSummary,
   type EvaRunResult,
   type EvaScenario,
-} from "@/lib/retell-eva"
+} from "@/lib/voiceiq-eva"
 
-interface RetellEvaPanelProps {
+interface VoiceIQEvaPanelProps {
   agentPrompt: string
   onImportDomainPrompt: (prompt: string) => void
 }
@@ -23,10 +23,10 @@ const DOMAINS = [
   { id: "enterprise_itsm", label: "Enterprise ITSM (5)" },
 ] as const
 
-export function RetellEvaPanel({
+export function VoiceIQEvaPanel({
   agentPrompt,
   onImportDomainPrompt,
-}: RetellEvaPanelProps) {
+}: VoiceIQEvaPanelProps) {
   const [scenarios, setScenarios] = useState<EvaScenario[]>([])
   const [selectedDomain, setSelectedDomain] = useState<string>("all")
   const [selectedEvaId, setSelectedEvaId] = useState<string>("")
@@ -42,8 +42,8 @@ export function RetellEvaPanel({
     async function load() {
       try {
         const [scenariosRes, benchmarkRes] = await Promise.all([
-          fetch("/api/retell-eva/scenarios"),
-          fetch("/api/retell-eva/benchmark"),
+          fetch("/api/voiceiq-eva/scenarios"),
+          fetch("/api/voiceiq-eva/benchmark"),
         ])
         const scenariosPayload = await scenariosRes.json()
         const benchmarkPayload = await benchmarkRes.json()
@@ -84,7 +84,7 @@ export function RetellEvaPanel({
     setRunning(true)
     setError(null)
     try {
-      const response = await fetch("/api/retell-eva/benchmark", {
+      const response = await fetch("/api/voiceiq-eva/benchmark", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -115,7 +115,7 @@ export function RetellEvaPanel({
   }
 
   if (loading) {
-    return <p className="text-center text-xs text-white/50">Loading RetellEVA…</p>
+    return <p className="text-center text-xs text-white/50">Loading VoiceIQ EVA…</p>
   }
 
   return (
@@ -124,7 +124,7 @@ export function RetellEvaPanel({
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-2xl space-y-2">
             <p className="text-[10px] font-bold uppercase tracking-widest text-cyan-400">
-              RetellEVA · Hugging Face EVA-Bench
+              VoiceIQ EVA · Hugging Face EVA-Bench
             </p>
             <h2 className="text-2xl font-bold">
               Pre-launch QA on enterprise voice scenarios

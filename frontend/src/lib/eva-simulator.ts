@@ -11,7 +11,7 @@ import {
   scoreEvaRun,
   type EvaRunResult,
   type EvaScenario,
-} from "./retell-eva"
+} from "./voiceiq-eva"
 import type { TranscriptTurn } from "./types"
 
 export async function runEvaSimulation(

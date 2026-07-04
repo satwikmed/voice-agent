@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import evaData from "@/data/eva-scenarios.json"
 import seedResults from "@/data/eva-benchmark-results.json"
 import { runEvaSimulation } from "@/lib/eva-simulator"
-import { aggregateEvaBenchmark, type EvaScenario } from "@/lib/retell-eva"
+import { aggregateEvaBenchmark, type EvaScenario } from "@/lib/voiceiq-eva"
 
 export async function GET() {
   return NextResponse.json(seedResults)
@@ -74,7 +74,7 @@ export async function POST(request: Request) {
   } catch (error: unknown) {
     const message =
       error instanceof Error ? error.message : "EVA benchmark failed unexpectedly."
-    console.error("RetellEVA benchmark error:", error)
+    console.error("VoiceIQ EVA benchmark error:", error)
     return NextResponse.json({ detail: message }, { status: 500 })
   }
 }

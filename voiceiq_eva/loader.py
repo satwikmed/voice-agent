@@ -56,7 +56,7 @@ def _load_json(path: Path) -> list[dict[str, Any]]:
 
 def _record_to_scenario(record: dict[str, Any]) -> EvaScenario:
     """Load from pre-mapped bundled JSON or raw EVA-Bench record."""
-    from retell_eva.mapper import eva_record_to_scenario
+    from voiceiq_eva.mapper import eva_record_to_scenario
 
     if "persona_prompt" in record and "eva_id" in record:
         return EvaScenario(

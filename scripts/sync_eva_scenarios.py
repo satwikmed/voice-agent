@@ -15,13 +15,13 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from retell_eva.loader import DOMAIN_FILES  # noqa: E402
-from retell_eva.mapper import eva_record_to_scenario  # noqa: E402
-from retell_eva.scenario_context import build_agent_context  # noqa: E402
+from voiceiq_eva.loader import DOMAIN_FILES  # noqa: E402
+from voiceiq_eva.mapper import eva_record_to_scenario  # noqa: E402
+from voiceiq_eva.scenario_context import build_agent_context  # noqa: E402
 
 PER_DOMAIN = 5
 OUTPUT_PATHS = [
-    PROJECT_ROOT / "retell_eva" / "data" / "eva-scenarios.json",
+    PROJECT_ROOT / "voiceiq_eva" / "data" / "eva-scenarios.json",
     PROJECT_ROOT / "frontend" / "src" / "data" / "eva-scenarios.json",
 ]
 

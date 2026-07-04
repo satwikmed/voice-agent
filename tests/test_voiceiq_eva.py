@@ -1,5 +1,5 @@
 """
-Tests for RetellEVA — EVA-Bench mapping and scoring.
+Tests for VoiceIQ EVA — EVA-Bench mapping and scoring.
 """
 
 from __future__ import annotations
@@ -9,9 +9,9 @@ from pathlib import Path
 
 import pytest
 
-from retell_eva.loader import load_eva_scenarios
-from retell_eva.mapper import eva_record_to_scenario
-from retell_eva.scorer import aggregate_benchmark, score_eva_run
+from voiceiq_eva.loader import load_eva_scenarios
+from voiceiq_eva.mapper import eva_record_to_scenario
+from voiceiq_eva.scorer import aggregate_benchmark, score_eva_run
 
 
 SAMPLE_EVA_RECORD = {
@@ -45,7 +45,7 @@ class TestEvaMapper:
         assert len(scenario.must_have_criteria) == 2
 
     def test_injects_caller_verification_facts(self):
-        from retell_eva.caller_facts import build_caller_facts
+        from voiceiq_eva.caller_facts import build_caller_facts
 
         record = {
             "id": "1.1",
@@ -138,7 +138,7 @@ class TestEvaScorer:
 
 class TestBundledScenarios:
     def test_bundled_scenarios_load(self):
-        path = Path(__file__).resolve().parent.parent / "retell_eva" / "data" / "eva-scenarios.json"
+        path = Path(__file__).resolve().parent.parent / "voiceiq_eva" / "data" / "eva-scenarios.json"
         assert path.exists(), "Run scripts/sync_eva_scenarios.py first"
         scenarios = load_eva_scenarios()
         assert len(scenarios) == 15

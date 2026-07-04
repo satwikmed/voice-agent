@@ -84,21 +84,23 @@ secondaryBackgroundColor = "#262730"
 textColor = "#FAFAFA"
 ```
 
-## RetellEVA — Pre-launch QA on Hugging Face EVA-Bench
+## VoiceIQ EVA — Pre-launch QA on Hugging Face EVA-Bench
 
-VoiceIQ now includes **RetellEVA**: run Retell-style agent prompts against enterprise scenarios from [ServiceNow EVA-Bench](https://huggingface.co/datasets/ServiceNow-AI/eva-bench) on Hugging Face. Scores **EVA-A** (accuracy) and **EVA-X** (experience). Complements Retell Assure post-launch QA.
+> **Disclaimer:** VoiceIQ EVA is an independent open-source project. It is not affiliated with, endorsed by, or employed by Retell AI, Inc.
+
+VoiceIQ includes **VoiceIQ EVA**: run voice-agent prompts against enterprise scenarios from [ServiceNow EVA-Bench](https://huggingface.co/datasets/ServiceNow-AI/eva-bench) on Hugging Face. Scores **EVA-A** (accuracy) and **EVA-X** (experience).
 
 ```bash
 # Run EVA benchmark suite
-python scripts/run_retell_eva.py --domain airline_csm --limit 5
+python scripts/run_voiceiq_eva.py --domain airline_csm --limit 5
 
 # Sync scenarios from Hugging Face
 python scripts/sync_eva_scenarios.py
 ```
 
-See [RETELL_EVA.md](RETELL_EVA.md) for full documentation, HF Space deployment, and Retell outreach template.
+See [VOICEIQ_EVA.md](VOICEIQ_EVA.md) for full documentation, HF Space deployment, and Retell outreach template.
 
-Portal: `/portal` → **RetellEVA** tab.
+Portal: `/portal` → **VoiceIQ EVA** tab.
 
 ## Running Tests
 

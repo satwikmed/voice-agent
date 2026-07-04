@@ -7,8 +7,8 @@ from __future__ import annotations
 import json
 from typing import Any
 
-from retell_eva.caller_facts import build_caller_facts, format_caller_facts_block
-from retell_eva.loader import DOMAIN_LABELS, EvaScenario
+from voiceiq_eva.caller_facts import build_caller_facts, format_caller_facts_block
+from voiceiq_eva.loader import DOMAIN_LABELS, EvaScenario
 
 DOMAIN_DIFFICULTY = {
     "airline_csm": "medium",
