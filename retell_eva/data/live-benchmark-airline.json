@@ -1,0 +1,59 @@
+{
+  "summary": {
+    "scenario_count": 1,
+    "eva_a_pass_at_1": 0.0,
+    "eva_x_pass_at_1": 0.0,
+    "composite_pass_at_1": 0.0,
+    "avg_eva_a": 0.305,
+    "avg_eva_x": 0.67,
+    "by_domain": {
+      "airline_csm": {
+        "scenario_count": 1,
+        "eva_a_pass_at_1": 0.0,
+        "eva_x_pass_at_1": 0.0,
+        "composite_pass_at_1": 0.0,
+        "avg_eva_a": 0.305,
+        "avg_eva_x": 0.67
+      }
+    }
+  },
+  "runs": [
+    {
+      "eva_id": "1.1.2",
+      "domain": "airline_csm",
+      "domain_label": "Airline Customer Service",
+      "scenario_name": "Airline Customer Service \u2014 Samantha Rodriguez (1.1.2)",
+      "goal_completed": false,
+      "total_turns": 6,
+      "overall_score": 56.0,
+      "eva_a": 0.305,
+      "eva_x": 0.6699999999999999,
+      "eva_a_pass": false,
+      "eva_x_pass": false,
+      "composite_pass": false,
+      "scores_breakdown": {
+        "response_relevance": 70,
+        "objection_handling": 60,
+        "conversation_flow": 75,
+        "empathy": 50,
+        "goal_completion": 30
+      },
+      "failure_points": [
+        {
+          "turn": 4,
+          "reason": "The agent provided a flight option that exceeded the caller's budget without exploring alternatives first."
+        },
+        {
+          "turn": 6,
+          "reason": "The agent failed to find any options that met the caller's criteria despite multiple requests, leading to frustration."
+        }
+      ],
+      "recommendations": [
+        "Explore all available options before presenting costs to ensure they meet the caller's budget.",
+        "Acknowledge the caller's frustration more explicitly to demonstrate empathy.",
+        "Offer to check for any potential discounts or promotions that might apply to the caller's situation.",
+        "Provide a summary of the options explored to reassure the caller that their needs were taken seriously."
+      ]
+    }
+  ]
+}

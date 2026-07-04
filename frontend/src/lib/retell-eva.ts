@@ -20,6 +20,7 @@ export interface EvaScenario {
   must_have_criteria: string[]
   starting_utterance: string
   tool_density: "low" | "medium" | "high"
+  agent_context?: string
 }
 
 export interface EvaScores {
@@ -89,29 +90,44 @@ export const DOMAIN_AGENT_PROMPTS: Record<EvaDomain, string> = {
 
 RULES FOR PHONE CONVERSATIONS:
 - Speak in short, natural sentences. No markdown, bullets, or URLs.
+- Use ONLY facts from the BACKEND STATE section below.
 - Authenticate the caller before changing bookings.
 - State total out-of-pocket cost before confirming any change.
-- Confirm flight number, date, arrival time, and seat assignment explicitly.
+- Assign and confirm seat, flight, date, arrival time, and confirmation code.
 
 Be professional, concise, and empathetic.`,
   healthcare_hrsd: `You are a Retell AI voice agent for Meridian Health System HR Service Desk.
 
 RULES FOR PHONE CONVERSATIONS:
-- Verify caller identity before accessing records.
-- Repeat NPI/DEA/license numbers digit-by-digit to confirm.
-- Handle multi-part requests sequentially.
-- Never guess credential status — verify before answering.
+- Use ONLY facts from the BACKEND STATE section below.
+- Verify caller identity (NPI + PIN, or employee ID + DOB) before accessing records.
+- When credentials match BACKEND STATE, accept verification immediately.
+- Follow the RESOLUTION SCRIPT step-by-step once verified.
+- Repeat case IDs digit-by-digit. Never invent identifiers.
 
 Be calm and precise.`,
   enterprise_itsm: `You are a Retell AI voice agent for NovaCorp IT Service Desk.
 
 RULES FOR PHONE CONVERSATIONS:
-- Authenticate before ticket or access changes.
-- Gather impact and prior troubleshooting before escalation.
-- State ticket numbers and next steps explicitly.
-- Explain blockers clearly when you cannot fulfill a request.
+- Use ONLY facts from the BACKEND STATE section below.
+- Authenticate employee (employee ID + phone last four) before account changes.
+- When credentials match BACKEND STATE, proceed immediately.
+- Follow the RESOLUTION SCRIPT step-by-step for the caller's issue.
 
-Be efficient but not robotic.`,
+Be efficient and clear.`,
+}
+
+export function buildEvaAgentPrompt(
+  scenario: EvaScenario,
+  customPrompt?: string
+): string {
+  const base =
+    customPrompt?.trim() ||
+    DOMAIN_AGENT_PROMPTS[scenario.domain] ||
+    DOMAIN_AGENT_PROMPTS.airline_csm
+  const context = scenario.agent_context?.trim()
+  if (!context) return base
+  return `${base}\n\n---\n${context}\n---`
 }
 
 export function scoreEvaRun(
@@ -126,7 +142,7 @@ export function scoreEvaRun(
   const goalSignal = goalCompleted ? 1 : 0
 
   const eva_a =
-    goalCompletion * 0.55 + goalSignal * 0.25 + responseRelevance * 0.2
+    goalCompletion * 0.45 + goalSignal * 0.35 + responseRelevance * 0.2
   const eva_x =
     conversationFlow * 0.4 +
     responseRelevance * 0.3 +

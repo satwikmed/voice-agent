@@ -44,6 +44,49 @@ class TestEvaMapper:
         assert "[GOAL_ACHIEVED]" in scenario.persona_prompt or "GOAL COMPLETION" in scenario.persona_prompt
         assert len(scenario.must_have_criteria) == 2
 
+    def test_injects_caller_verification_facts(self):
+        from retell_eva.caller_facts import build_caller_facts
+
+        record = {
+            "id": "1.1",
+            "domain": "healthcare_hrsd",
+            "user_config": json.dumps({"name": "Priya Sharma", "gender": "woman"}),
+            "user_goal": SAMPLE_EVA_RECORD["user_goal"],
+            "scenario_context": json.dumps({"premise": "License extension."}),
+            "initial_scenario_database": json.dumps(
+                {
+                    "providers": {
+                        "3746317213": {
+                            "npi": "3746317213",
+                            "first_name": "Priya",
+                            "last_name": "Sharma",
+                            "facility_code": "KAFN-13R",
+                            "pin": "4257",
+                            "employee_id": "EMP126225",
+                            "licenses": {
+                                "FL-MD-30058838": {
+                                    "state_license_number": "FL-MD-30058838",
+                                    "state_code": "FL",
+                                }
+                            },
+                        }
+                    }
+                }
+            ),
+            "ground_truth": json.dumps({"expected_scenario_db": {"providers": {}}}),
+        }
+        scenario = eva_record_to_scenario(record)
+        assert "3746317213" in scenario.persona_prompt
+        assert "4257" in scenario.persona_prompt
+        facts = build_caller_facts(
+            domain="healthcare_hrsd",
+            scenario_database=json.loads(record["initial_scenario_database"]),
+            ground_truth=json.loads(record["ground_truth"]),
+            user_config={"name": "Priya Sharma"},
+        )
+        assert facts["NPI"] == "3746317213"
+        assert facts["4-digit PIN"] == "4257"
+
     def test_domain_difficulty_mapping(self):
         airline = eva_record_to_scenario({**SAMPLE_EVA_RECORD, "domain": "airline_csm"})
         healthcare = eva_record_to_scenario(

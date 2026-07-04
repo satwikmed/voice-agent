@@ -1,7 +1,7 @@
 import type { FailurePoint, ScoresBreakdown, TranscriptTurn } from "./types"
 
 export const OPENAI_MODEL = "gpt-4o-mini"
-export const MAX_TURNS = 10
+export const MAX_TURNS = 20
 
 export const DIMENSION_WEIGHTS: ScoresBreakdown = {
   response_relevance: 0.2,

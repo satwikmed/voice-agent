@@ -56,8 +56,8 @@ def score_eva_run(
     # EVA-A: weighted toward task completion; boost if caller signaled goal achieved
     goal_signal = 1.0 if goal_completed else 0.0
     eva_a = (
-        goal_completion * 0.55
-        + goal_signal * 0.25
+        goal_completion * 0.45
+        + goal_signal * 0.35
         + response_relevance * 0.20
     )
     eva_a_breakdown = {

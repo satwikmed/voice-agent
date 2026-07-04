@@ -7,7 +7,7 @@ import {
   parseJudgeResponse,
 } from "./judge"
 import {
-  DOMAIN_AGENT_PROMPTS,
+  buildEvaAgentPrompt,
   scoreEvaRun,
   type EvaRunResult,
   type EvaScenario,
@@ -19,11 +19,7 @@ export async function runEvaSimulation(
   scenario: EvaScenario,
   customAgentPrompt?: string
 ): Promise<EvaRunResult> {
-  const agentPrompt =
-    customAgentPrompt?.trim() ||
-    DOMAIN_AGENT_PROMPTS[scenario.domain] ||
-    DOMAIN_AGENT_PROMPTS.airline_csm
-
+  const agentPrompt = buildEvaAgentPrompt(scenario, customAgentPrompt)
   const callerSystemPrompt = buildCallerSystemPrompt(scenario.persona_prompt)
 
   const agentMessages: Array<{ role: string; content: string }> = [
@@ -41,15 +37,21 @@ export async function runEvaSimulation(
     totalTurns = turn
 
     const agentText = await callOpenAI(apiKey, agentMessages, {
-      temperature: 0.7,
+      temperature: 0.3,
     })
     transcript.push({ turn, role: "agent", content: agentText })
     agentMessages.push({ role: "assistant", content: agentText })
     callerMessages.push({ role: "user", content: agentText })
 
-    const callerText = await callOpenAI(apiKey, callerMessages, {
-      temperature: 0.8,
-    })
+    let callerText: string
+    if (turn === 1 && scenario.starting_utterance?.trim()) {
+      callerText = scenario.starting_utterance.trim()
+    } else {
+      callerText = await callOpenAI(apiKey, callerMessages, {
+        temperature: 0.7,
+      })
+    }
+
     transcript.push({ turn, role: "caller", content: callerText })
     callerMessages.push({ role: "assistant", content: callerText })
     agentMessages.push({ role: "user", content: callerText })

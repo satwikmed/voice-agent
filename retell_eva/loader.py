@@ -43,6 +43,7 @@ class EvaScenario:
     must_have_criteria: list[str] = field(default_factory=list)
     starting_utterance: str = ""
     tool_density: str = "medium"
+    agent_context: str = ""
 
 
 def _load_json(path: Path) -> list[dict[str, Any]]:
@@ -73,6 +74,7 @@ def _record_to_scenario(record: dict[str, Any]) -> EvaScenario:
             must_have_criteria=list(record.get("must_have_criteria", [])),
             starting_utterance=str(record.get("starting_utterance", "")),
             tool_density=str(record.get("tool_density", "medium")),
+            agent_context=str(record.get("agent_context", "")),
         )
     return eva_record_to_scenario(record)
 

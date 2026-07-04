@@ -9,7 +9,7 @@ import logging
 from dataclasses import asdict, dataclass
 from typing import Any
 
-from retell_eva.agent_prompts import get_domain_agent_prompt
+from retell_eva.agent_prompts import build_eva_agent_prompt
 from retell_eva.loader import EvaScenario, load_eva_scenarios
 from retell_eva.scorer import aggregate_benchmark, score_eva_run
 from simulator.agent_simulator import run_simulation
@@ -62,10 +62,16 @@ async def run_eva_scenario(
     numeric_id: int = 9000,
 ) -> EvaRunResult:
     """Run a single EVA scenario against a Retell-style agent prompt."""
-    prompt = get_domain_agent_prompt(eva.domain, agent_prompt)
+    prompt = build_eva_agent_prompt(eva, agent_prompt)
     scenario = _eva_to_voiceiq_scenario(eva, numeric_id)
 
-    sim = await run_simulation(prompt, scenario)
+    sim = await run_simulation(
+        prompt,
+        scenario,
+        caller_opener=eva.starting_utterance or None,
+        agent_temperature=0.3,
+        caller_temperature=0.5,
+    )
     judge = await evaluate_transcript(sim["transcript"], eva.scenario_description)
 
     eva_scores = score_eva_run(

@@ -96,6 +96,10 @@ def _detect_termination(caller_message: str) -> tuple[bool, bool]:
 async def run_simulation(
     agent_system_prompt: str,
     scenario: Scenario,
+    *,
+    caller_opener: str | None = None,
+    agent_temperature: float | None = None,
+    caller_temperature: float | None = None,
 ) -> dict[str, Any]:
     """Run a full agent ↔ caller simulation and return the results.
 
@@ -121,6 +125,9 @@ async def run_simulation(
         OPENAI_MODEL,
     )
 
+    agent_temp = agent_temperature if agent_temperature is not None else AGENT_TEMPERATURE
+    caller_temp = caller_temperature if caller_temperature is not None else CALLER_TEMPERATURE
+
     caller_system_prompt = _build_caller_system_prompt(scenario.persona_prompt)
 
     # Conversation histories (each side keeps its own view).
@@ -142,7 +149,7 @@ async def run_simulation(
             agent_response = await client.chat.completions.create(
                 model=OPENAI_MODEL,
                 messages=agent_messages,
-                temperature=AGENT_TEMPERATURE
+                temperature=agent_temp
             )
         except Exception:
             logger.exception("OpenAI call failed on agent turn %d.", turn)
@@ -159,17 +166,21 @@ async def run_simulation(
 
         # --- Caller turn ---------------------------------------------------
         logger.debug("Turn %d – caller generating response…", turn)
-        try:
-            caller_response = await client.chat.completions.create(
-                model=OPENAI_MODEL,
-                messages=caller_messages,
-                temperature=CALLER_TEMPERATURE
-            )
-        except Exception:
-            logger.exception("OpenAI call failed on caller turn %d.", turn)
-            raise
+        # Seed caller's opening line after agent greeting on turn 1
+        if turn == 1 and caller_opener and caller_opener.strip():
+            caller_text = caller_opener.strip()
+        else:
+            try:
+                caller_response = await client.chat.completions.create(
+                    model=OPENAI_MODEL,
+                    messages=caller_messages,
+                    temperature=caller_temp
+                )
+            except Exception:
+                logger.exception("OpenAI call failed on caller turn %d.", turn)
+                raise
 
-        caller_text: str = caller_response.choices[0].message.content or ""
+            caller_text: str = caller_response.choices[0].message.content or ""
         logger.debug("Turn %d – caller: %s", turn, caller_text[:120])
 
         transcript.append({"role": "caller", "content": caller_text, "turn": turn})

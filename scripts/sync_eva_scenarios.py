@@ -17,12 +17,21 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 from retell_eva.loader import DOMAIN_FILES  # noqa: E402
 from retell_eva.mapper import eva_record_to_scenario  # noqa: E402
+from retell_eva.scenario_context import build_agent_context  # noqa: E402
 
 PER_DOMAIN = 5
 OUTPUT_PATHS = [
     PROJECT_ROOT / "retell_eva" / "data" / "eva-scenarios.json",
     PROJECT_ROOT / "frontend" / "src" / "data" / "eva-scenarios.json",
 ]
+
+
+def _parse_json(value: object) -> dict:
+    if isinstance(value, dict):
+        return value
+    if isinstance(value, str):
+        return json.loads(value)
+    return {}
 
 
 def main() -> None:
@@ -43,6 +52,21 @@ def main() -> None:
                 row = json.loads(line)
                 row["domain"] = domain
                 scenario = eva_record_to_scenario(row)
+                user_goal = _parse_json(row.get("user_goal"))
+                user_config = _parse_json(row.get("user_config"))
+                scenario_context = _parse_json(row.get("scenario_context"))
+                scenario_db = _parse_json(
+                    row.get("initial_scenario_database") or row.get("initial_scenario_db")
+                )
+                ground_truth = _parse_json(row.get("ground_truth"))
+                agent_context = build_agent_context(
+                    domain=domain,
+                    scenario_database=scenario_db,
+                    ground_truth=ground_truth,
+                    user_goal=user_goal,
+                    user_config=user_config,
+                    scenario_context=scenario_context,
+                )
                 records.append(
                     {
                         "eva_id": scenario.eva_id,
@@ -59,6 +83,7 @@ def main() -> None:
                         "must_have_criteria": scenario.must_have_criteria,
                         "starting_utterance": scenario.starting_utterance,
                         "tool_density": scenario.tool_density,
+                        "agent_context": agent_context,
                     }
                 )
 

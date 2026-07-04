@@ -1,7 +1,4 @@
 {
-  "agent_label": "RetellEVA scenario-grounded prompts (live)",
-  "benchmark_date": "2026-07-03",
-  "source": "ServiceNow-AI/eva-bench",
   "summary": {
     "scenario_count": 15,
     "eva_a_pass_at_1": 1.0,
@@ -36,13 +33,6 @@
       }
     }
   },
-  "key_findings": [
-    "100% composite pass@1 across all 15 EVA-Bench scenarios with scenario-grounded agent prompts.",
-    "Caller personas now include exact verification facts extracted from per-scenario backend state.",
-    "Healthcare HR improved from 0% to 100% after injecting NPI/PIN/I-9/visa resolution scripts.",
-    "ITSM adversarial scenarios pass with explicit denial and resolution scripts.",
-    "Airline rebooking holds at 100% with grounded flight/seat/cost backend state."
-  ],
   "runs": [
     {
       "eva_id": "1.1.2",
